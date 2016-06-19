@@ -36,6 +36,8 @@ SOFTWARE.
 	$page = 1;
 	if (isset($_GET['page'])) $page = $_GET['page'];
 	$limit = preorders_per_page;
+	$date_order = 'ASC';
+	if (isset($_GET['date_order'])) $date_order = strtoupper($_GET['date_order']);
 	if (isset($_GET['done'])) {
 		$done = $_GET['done'];
 		$rc = $db_connection->query("UPDATE preorders SET done = 1 WHERE id = $done");
@@ -45,8 +47,8 @@ SOFTWARE.
 		}
 	}
 	$offset = ($page - 1) * preorders_per_page;
-	$rc = $db_connection->query("SELECT * FROM preorders WHERE done = 0 LIMIT $limit".
-		" OFFSET $offset");
+	$rc = $db_connection->query("SELECT * FROM preorders WHERE done = 0 ORDER BY ".
+		"creating_time $date_order LIMIT $limit OFFSET $offset");
 	if (!$rc) {
 		echo 'Error: '.mysqli_error($db_connection);
 		exit();

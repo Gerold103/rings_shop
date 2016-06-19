@@ -32,7 +32,10 @@ SOFTWARE.
         <td>Имя</td>
         <td>Телефон</td>
         <td>Почта</td>
-        <td>Дата получения</td>
+        <td>Дата заказа
+          <a href="?page=1&date_order=desc"><button>По уб.</button></a>
+          <a href="?page=1&date_order=asc"><button>По возр.</button></a>
+        </td>
         <td>Заказ</td>
         <td>Отметить как выполненный</td>
       </tr>
