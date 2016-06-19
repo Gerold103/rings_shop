@@ -1,3 +1,25 @@
+/*
+Copyright (c) 2016 Shpilevoy Vladislav <vshpilevoi@mail.ru>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is furnished
+to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+
 ring_names = {1: 'Перстень', 2: 'Кольцо', 3: 'Колечко'};
 materials = ['Серебро', 'Бумага', 'Ничего'];
 costs = {
@@ -62,7 +84,6 @@ function move_on_progress_preload_bar(ring_id, next_frame) {
       'linear-gradient(90deg, #1795B6 50%, transparent 50%)'});
   } else {
     degrees += 90;
-    console.log(bar.css('background-image', 'red'));
     bar.css({'background-image': 'linear-gradient('+degrees.toString()+'deg, transparent 50%, #1795B6 50%),'+
       'linear-gradient(90deg, #1795B6 50%, transparent 50%)'});
   }
