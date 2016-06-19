@@ -1,11 +1,11 @@
 <?php
   include_once("credentials.php");
-  $db_connection = mysqli_connect(db_host, db_name, db_password);
+  $db_connection = mysqli_connect(db_host, db_user_name, db_password);
   if (!$db_connection->ping()) {
     echo json_encode(['error' => 'Database connection error']);
     exit();
   }
-  if (!$db_connection->select_db('gb_x_cmc_r2fe')) {
+  if (!$db_connection->select_db(db_name)) {
     echo json_encode(['error' => 'Database connection error']);
     exit();
   }
