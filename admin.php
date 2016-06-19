@@ -68,6 +68,8 @@ SOFTWARE.
 			exit();
 		}
 		while($ring_set = $order_rc->fetch_assoc()) {
+			$ring_set['type'] = $ring_types_ids_reversed[$ring_set['type']];
+			$ring_set['material'] = $ring_materials_ids_reversed[$ring_set['material']];
 			array_push($row['order'], $ring_set);
 		}
 		array_push($preorders, $row);
