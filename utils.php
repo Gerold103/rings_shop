@@ -1,4 +1,5 @@
-<!--
+<?php
+/*
 Copyright (c) 2016 Shpilevoy Vladislav <vshpilevoi@mail.ru>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -18,8 +19,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
--->
-<?php
+*/
   include_once("credentials.php");
   $db_connection = mysqli_connect(db_host, db_user_name, db_password);
   if (!$db_connection->ping()) {
@@ -39,6 +39,8 @@ SOFTWARE.
   const max_ring_size = 60;
 
   const max_rings_count = 30;
+
+  const preorders_per_page = 3;
 
   $ring_materials = ['Серебро', 'Бумага', 'Ничего'];
   $ring_types = ['Перстень', 'Кольцо', 'Колечко'];

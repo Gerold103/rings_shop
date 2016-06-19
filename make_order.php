@@ -1,4 +1,5 @@
-<!--
+<?php
+/*
 Copyright (c) 2016 Shpilevoy Vladislav <vshpilevoi@mail.ru>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -18,8 +19,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
--->
-<?php
+*/
 	include_once('utils.php');
 	$name = strtolower($db_connection->real_escape_string($_POST['name']));
 	$phone = strtolower($db_connection->real_escape_string($_POST['phone']));
