@@ -1,0 +1,150 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="Заказать кольца ВМК МГУ">
+    <meta name="keywords" content="Кольцо, серебро, ВМК, МГУ, купить кольцо, заказать кольцо">
+    <title>Купить кольца ВМК МГУ</title>
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+  </head>
+
+  <body>
+    <div align="center" class="footer-wrapper">
+      <div class="not-footer">
+        <div class="container-of-all">
+          <div role="Header" class="main-header-place" align="center">
+            <img src="css/main_rings.png">
+            <h1 align="center">Кольца<br><span><font color="#75acff">ВМК</font>МГУ</span></h1>
+          </div>
+        </div>
+        
+        <div class="slideshow" align="center">
+          <div class="close-slides" align="right" onclick="hide_slideshow();">
+            <img src="css/big-close.svg">
+          </div>
+          <div class="slideshow-content">
+            <div class="slide-text" align="left">
+              <h2>ПЕРСТЕНЬ</h2>
+              <div>
+                СЕРЕБРЯННЫЙ: 2000<br>
+                НИЧЕГОШНЫЙ: 0<br>
+                БУМАГА: 50<br>
+              </div>
+              <p>
+                Nam dignissim neque tempus mauris convallis, ut fermentum erat aliquam. Duis commodo felis posuere ligula dictum tincidunt. Integer sit amet orci nec neque efficitur congue. Mauris a luctus odio. Ut nec elementum velit. 
+              </p>
+            </div>
+            <div class="slide-photos">
+              <div class="slide-control previous" onclick="move_slides_left();">
+                <img src="css/left-arrow.svg">
+              </div>
+              <div class="slide-photo active">
+                <video controls preload="none" poster="css/mov_bbb_poster.jpg">
+                  <source src="css/mov_bbb.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="slide-photo">
+                <img src="css/slide1.jpg">
+              </div>
+              <div class="slide-photo">
+                <img src="css/slide2.jpg">
+              </div>
+              <div class="slide-photo">
+                <img src="css/slide3.jpg">
+              </div>
+              
+              <div class="slide-control next" onclick="move_slides_right();">
+                <img src="css/right-arrow.svg">
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="ring-variants" align="center">
+          <img src="css/shadow.png" class="shadow-rounded">
+          <div class="ring-item">
+            <div class="ring-small-container">
+              <div class="ring-small-progress-bar"></div>
+              <img class="ring-img-small" src="css/ring2_190/ring2_frame0000.jpg" data-imgid="1" onclick="show_photos(1);" onmouseover="mouse_on_ring(1);" onmouseout="mouse_out_ring(1);">
+            </div>
+            <span>Кольцо</span>
+          </div>
+          <div class="ring-item">
+            <div class="ring-small-container">
+              <div class="ring-small-progress-bar"></div>
+              <img class="ring-img-small" src="css/ring0_190/ring0_frame0000.jpg" data-imgid="1" onclick="show_photos(2);" onmouseover="mouse_on_ring(2);" onmouseout="mouse_out_ring(2);">
+            </div>
+            <span>Перстень</span>
+          </div>
+          <div class="ring-item">
+            <div class="ring-small-container">
+              <div class="ring-small-progress-bar"></div>
+              <img class="ring-img-small" src="css/ring1_190/ring1_frame0000.jpg" data-imgid="1" onclick="show_photos(3);" onmouseover="mouse_on_ring(3);" onmouseout="mouse_out_ring(3);">
+            </div>
+            <span>Колечко</span>
+          </div>
+        </div>
+        <img src="css/shadow.png" class="shadow-rounded">
+        <div class="container-of-all">
+          <div class="make-order-button" align="center">
+            <div id="make-order-button-id" onclick="show_order_area();">
+              СДЕЛАТЬ БЕСПЛАТНЫЙ ПРЕДЗАКАЗ
+            </div>
+          </div>
+        </div>
+        <div class="order-making-area" id="order-making-area-id">
+          <div class="container-of-all">
+            <div class="order-panel" align="center">
+              <div class="add-ring">
+                <img src="css/ring0.svg" onclick="add_ring(1);">
+              </div>
+              <div class="add-ring">
+                <img src="css/ring1.svg" onclick="add_ring(2);">
+              </div>
+              <div class="add-ring">
+                <img src="css/ring2.svg" onclick="add_ring(3);">
+              </div>
+              <div class="rings-basket">
+              </div>
+              <div align="left" class="rings-basket-result">
+                <div>Не выбрано ни одного кольца</div>
+              </div>
+            </div>
+            <div class="contacts-panel" align="center">
+              <div>
+                <div class="contact-field" align="left">
+                  <span>ИМЯ*</span><input id="customer-name"/>
+                </div>
+                <div class="contact-field" align="left">
+                  <span>ТЕЛЕФОН*</span><input id="customer-phone"/>
+                </div>
+                <div class="contact-field" align="left">
+                  <span>EMAIL</span><input id="customer-email"/>
+                </div>
+                <div class="finish-contact-field" align="right">
+                  * Обязательные поля
+                </div>
+              </div>
+            </div>
+            <div class="make-order" align="center">
+              <div align="center" class="message-bubble-container">
+                <div class="message-bubble">Сообщение</div>
+              </div>
+              <div onclick="send_info();" id="make-order-btn-id">ЗАКАЗАТЬ</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer" align="center">
+        <div class="container-of-all" align="left">
+          <div>ВОПРОСЫ И ПОЖЕЛАНИЯ: <u>EMAIL@EMAIL.RU</u></div>
+          <div>ДИЗАЙН КОЛЕЦ И САЙТА: <u><a href="mailto:me@ag-one.ru">АБДУЛЛА ГАЙБУЛЛАЕВ</a></u></div>
+          <div>РАЗРАБОТКА САЙТА: <u><a href="http://lgmis.cs.msu.ru/user/25">ВЛАДИСЛАВ ШПИЛЕВОЙ</a></u>
+        </div>
+      </div>
+    </div>
+    <div id="overlay" onclick="hide_slideshow();"></div>
+  </body>
+</html>
