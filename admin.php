@@ -37,7 +37,11 @@ SOFTWARE.
 	if (isset($_GET['page'])) $page = $_GET['page'];
 	$limit = preorders_per_page;
 	$date_order = 'ASC';
-	if (isset($_GET['date_order'])) $date_order = strtoupper($_GET['date_order']);
+	if (isset($_SESSION['date_order'])) $date_order = $_SESSION['date_order'];
+	if (isset($_GET['date_order'])) {
+		$date_order = strtoupper($_GET['date_order']);
+		$_SESSION['date_order'] = $date_order;
+	}
 	if (isset($_GET['done'])) {
 		$done = $_GET['done'];
 		$rc = $db_connection->query("UPDATE preorders SET done = 1 WHERE id = $done");
