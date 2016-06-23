@@ -58,6 +58,18 @@ rings_cycle = 90;
 rings_min_photo_id = 0;
 rings_max_photo_id = 35;
 
+slideshow_photos = [
+  [{photo: 'css/rings_show/ring2_0.png'}],
+  [{photo: 'css/rings_show/ring0_0.png'}],
+  [{photo: 'css/rings_show/ring1_0.png'}]
+];
+
+slideshow_rings_info = [
+  {id: 2, description: 'Текст о кольце'},
+  {id: 1, description: 'Текст о перстне'},
+  {id: 3, description: 'Текст о колечке'}
+]
+
 function get_str_ring_rolle_id(num_id) {
   if (num_id < 10)
     return '00'+num_id.toString()+'.jpg';
@@ -177,6 +189,57 @@ function show_photos(photo_number) {
   elem_height = slideshow.height();
   top_offset = parseInt((all_height - elem_height)/2);
   slideshow.css({"top": top_offset});
+  photo_number -= 1;
+  slide_text = $(".slide-text");
+  ring_id = slideshow_rings_info[photo_number]['id'];
+  ring_name = ring_names[ring_id];
+  slide_text.empty();
+    header = document.createElement('h2');
+    header.innerHTML = ring_name;
+    slide_text.append(header);
+
+    price = document.createElement('div');
+    local_costs = costs[ring_name];
+    price.innerHTML = materials[0]+': '+local_costs[materials[0]]+'<br>';
+    price.innerHTML += materials[1]+': '+local_costs[materials[1]]+'<br>';
+    price.innerHTML += materials[2]+': '+local_costs[materials[2]];
+    slide_text.append(price);
+
+    description = document.createElement('p');
+    description.innerHTML = slideshow_rings_info[photo_number]['description'];
+    slide_text.append(description);
+
+  slide_photos = $(".slide-photos");
+  slide_photos.empty();
+    left_control = document.createElement('div');
+    left_control.className = "slide-control previous";
+    left_control.addEventListener("click", move_slides_left);
+    left_control.innerHTML = '<img src="css/left-arrow.svg">';
+    slide_photos.append(left_control);
+
+    slides = slideshow_photos[photo_number];
+    for (i = 0; i < slides.length; ++i) {
+      if ('photo' in slides[i]) {
+        next_photo = document.createElement('div');
+        next_photo.className = "slide-photo";
+          if (i == 0)
+            next_photo.className += " active";
+          img = document.createElement('img');
+          img.src = slides[i]['photo'];
+          next_photo.appendChild(img);
+        slide_photos.append(next_photo);
+      } else {
+        console.log('not supported');
+      }
+    }
+
+    right_control = document.createElement('div');
+    right_control.className = "slide-control next";
+    right_control.addEventListener("click", move_slides_right);
+    right_control.innerHTML = '<img src="css/right-arrow.svg">';
+    slide_photos.append(right_control);
+
+
   slideshow.fadeIn(500);
   $('body').css({'overflow': 'hidden'});
 }
