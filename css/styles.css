@@ -200,9 +200,15 @@ a:link, a:visited, a:hover, a:active {
 }
 
 .ring-variants .ring-item span {
-  display: block;
+  display: inline-block;
   font-size: 25px;
   font-family: GothicFont;
+  background-color: #c7c7c7;
+  padding: 6px;
+  width: 150px;
+  border-radius: 7px;
+  box-shadow: 0px 2px 0px 0px rgba(0,0,0,0.75);
+  cursor: pointer;
 }
 
 .ring-small-container {

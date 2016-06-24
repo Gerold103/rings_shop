@@ -40,13 +40,16 @@ SOFTWARE.
 
   const max_rings_count = 30;
 
-  const preorders_per_page = 3;
+  const preorders_per_page = 10;
 
-  $ring_materials = ['Серебро', 'Бумага', 'Ничего'];
+  //$ring_materials = ['Серебро', 'Бумага', 'Ничего'];
+  $ring_materials = ['Серебро'];
   $ring_types = ['Перстень', 'Кольцо', 'Колечко'];
 
   $ring_types_ids = ['Перстень' => 1, 'Кольцо' => 2, 'Колечко' => 3];
   $ring_types_ids_reversed = [1 => 'Перстень', 2 => 'Кольцо', 3 => 'Колечко'];
-  $ring_materials_ids = ['Серебро' => 1, 'Бумага' => 2, 'Ничего' => 3];
-  $ring_materials_ids_reversed = [1 => 'Серебро', 2 => 'Бумага', 3 => 'Ничего'];
+  //$ring_materials_ids = ['Серебро' => 1, 'Бумага' => 2, 'Ничего' => 3];
+  $ring_materials_ids = ['Серебро' => 1];
+  //$ring_materials_ids_reversed = [1 => 'Серебро', 2 => 'Бумага', 3 => 'Ничего'];
+  $ring_materials_ids_reversed = [1 => 'Серебро'];
 ?>

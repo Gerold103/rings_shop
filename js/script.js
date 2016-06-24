@@ -21,23 +21,30 @@ SOFTWARE.
 */
 
 ring_names = {1: 'Перстень', 2: 'Кольцо', 3: 'Колечко'};
-materials = ['Серебро', 'Бумага', 'Ничего'];
+//materials = ['Серебро', 'Бумага', 'Ничего'];
+materials = ['Серебро'];
 costs = {
   'Перстень': {
-    'Серебро': 2000,
-    'Бумага': 1000,
-    'Ничего': 500
+    'Серебро': 3000//,
+    // 'Бумага': 1000,
+    // 'Ничего': 500
   },
   'Кольцо': {
-    'Серебро': 5000,
-    'Бумага': 4000,
-    'Ничего': 3000
+    'Серебро': 2000//,
+    // 'Бумага': 4000,
+    // 'Ничего': 3000
   },
   'Колечко': {
-    'Серебро': 10000,
-    'Бумага': 9000,
-    'Ничего': 8000
+    'Серебро': 2500//,
+    // 'Бумага': 9000,
+    // 'Ничего': 8000
   }
+};
+
+rings_sizes = {
+  'Перстень': [18, 19.5],
+  'Кольцо': [16.5, 18, 19.5],
+  'Колечко': [16.5, 18]
 };
 
 start_ring_size = 16.5;
@@ -59,15 +66,31 @@ rings_min_photo_id = 0;
 rings_max_photo_id = 35;
 
 slideshow_photos = [
-  [{photo: 'css/rings_show/ring2_0.png'}],
-  [{photo: 'css/rings_show/ring0_0.png'}],
-  [{photo: 'css/rings_show/ring1_0.png'}]
+  [
+    {photo: 'css/rings_show/ring2_0.png'},
+    {photo: 'css/rings_show/ring2_1.png'},
+    {photo: 'css/rings_show/ring2_2.png'},
+    {photo: 'css/rings_show/ring2_3.png'}
+  ],
+  [
+    {photo: 'css/rings_show/ring0_0.png'},
+    {photo: 'css/rings_show/ring0_1.png'},
+    {photo: 'css/rings_show/ring0_2.png'},
+    {photo: 'css/rings_show/ring0_3.png'},
+  ],
+  [
+    {photo: 'css/rings_show/ring1_0.png'},
+    {photo: 'css/rings_show/ring1_1.png'},
+    {photo: 'css/rings_show/ring1_2.png'},
+    {photo: 'css/rings_show/ring1_3.png'},
+    {photo: 'css/rings_show/ring1_4.png'}
+  ]
 ];
 
 slideshow_rings_info = [
-  {id: 2, description: 'Текст о кольце'},
-  {id: 1, description: 'Текст о перстне'},
-  {id: 3, description: 'Текст о колечке'}
+  {id: 2, description: 'Вариант для всех и каждого, кто знает цену успеха и умеет выглядеть солидно'},
+  {id: 1, description: 'Вариант для того, кто ценит дух свободы и бунтарства'},
+  {id: 3, description: 'Вариант для той, кто может оценить грацию и изящество'}
 ]
 
 function get_str_ring_rolle_id(num_id) {
@@ -201,8 +224,8 @@ function show_photos(photo_number) {
     price = document.createElement('div');
     local_costs = costs[ring_name];
     price.innerHTML = materials[0]+': '+local_costs[materials[0]]+'<br>';
-    price.innerHTML += materials[1]+': '+local_costs[materials[1]]+'<br>';
-    price.innerHTML += materials[2]+': '+local_costs[materials[2]];
+    //price.innerHTML += materials[1]+': '+local_costs[materials[1]]+'<br>';
+    //price.innerHTML += materials[2]+': '+local_costs[materials[2]];
     slide_text.append(price);
 
     description = document.createElement('p');
@@ -467,6 +490,7 @@ function create_strings_selecter(label, variants) {
 }
 
 function create_ring_busket_item(id) {
+  name = ring_names[id];
   item = document.createElement('div');
   item.className = "rings-basket-item";
     close_btn = document.createElement('span');
@@ -478,9 +502,10 @@ function create_ring_busket_item(id) {
 
     ring_name = document.createElement('span');
     ring_name.className = "rings-basket-item-name";
-    ring_name.innerHTML = ring_names[id];
+    ring_name.innerHTML = name;
 
-    size = create_number_selecter('Размер', start_ring_size, 'float');
+    //size = create_number_selecter('Размер', start_ring_size, 'float');
+    size = create_strings_selecter('Размер', rings_sizes[name]);
     material = create_strings_selecter('Материал', materials);
     count = create_number_selecter('Количество', 1, 'int');
   item.appendChild(close_btn);
