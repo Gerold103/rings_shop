@@ -61,16 +61,55 @@ SOFTWARE.
 	while($row = $rc->fetch_assoc()) {
 		$row['order'] = [];
 		$preorder_id = $row['id'];
-		$order_rc = $db_connection->query("SELECT type, size, material, count ".
+		$local_rc = $db_connection->query("SELECT type, size, material, count ".
 			"FROM rings_sets WHERE preorder_id=$preorder_id");
-		if (!$order_rc) {
+		if (!$local_rc) {
 			echo 'Error: '.mysqli_error($db_connection);
 			exit();
 		}
-		while($ring_set = $order_rc->fetch_assoc()) {
+		while($ring_set = $local_rc->fetch_assoc()) {
 			$ring_set['type'] = $ring_types_ids_reversed[$ring_set['type']];
 			$ring_set['material'] = $ring_materials_ids_reversed[$ring_set['material']];
 			array_push($row['order'], $ring_set);
+		}
+
+		$local_rc = $db_connection->query("SELECT mark, stud_number FROM mark_discounts".
+			" WHERE preorder_id=$preorder_id");
+		if (!$local_rc) {
+			echo 'Error: '.mysqli_error($db_connection);
+			exit();
+		}
+		$discs = [];
+		while($disc = $local_rc->fetch_assoc()) {
+			$next = '<b>Балл:</b> '.$disc['mark'].'; <b>Номер:</b> '.$disc['stud_number'];
+			array_push($discs, $next);
+		}
+		$row['discs'] = $discs;
+
+		$row['packs'] = [];
+		$local_rc = $db_connection->query("SELECT id, pack_id, material FROM rings_packs".
+			" WHERE preorder_id=$preorder_id");
+		if (!$local_rc) {
+			echo 'Error: '.mysqli_error($db_connection);
+			exit();
+		}
+		while($next_pack_row = $local_rc->fetch_assoc()) {
+			$type = $rings_packages[$next_pack_row['pack_id']]['name'];
+			$material = $ring_materials_ids_reversed[$next_pack_row['material']];
+			$pack_id = $next_pack_row['id'];
+			$rings = [];
+			$rings_rc = $db_connection->query("SELECT type, size FROM rings_pack_items".
+				" WHERE rings_pack_id=$pack_id");
+			if (!$rings_rc) {
+				echo 'Error: '.mysqli_error($db_connection);
+				exit();
+			}
+			while($next_ring_row = $rings_rc->fetch_assoc()) {
+				$ring_type = $ring_types_ids_reversed[$next_ring_row['type']];
+				$ring_size = $next_ring_row['size'];
+				array_push($rings, ['ring' => $ring_type, 'size' => $ring_size]);
+			}
+			array_push($row['packs'], ['type' => $type, 'material' => $material, 'rings' => $rings]);
 		}
 		array_push($preorders, $row);
 	}

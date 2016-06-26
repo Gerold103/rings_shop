@@ -8,6 +8,17 @@
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/jquery-ui.min.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
+    <link rel="icon" type="image/png" href="css/favicons/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="css/favicons/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="css/favicons/favicon-96x96.png" sizes="96x96">
+    <link rel="apple-touch-icon" sizes="57x57" href="css/favicons/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="css/favicons/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="css/favicons/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="css/favicons/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="css/favicons/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="css/favicons/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="css/favicons/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="css/favicons/apple-touch-icon-152x152.png">
     <!-- Yandex.Metrika counter --> <script type="text/javascript"> (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter38106545 = new Ya.Metrika({ id:38106545, clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true, trackHash:true }); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = "https://mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks"); </script> <noscript><div><img src="https://mc.yandex.ru/watch/38106545" style="position:absolute; left:-9999px;" alt="" /></div></noscript> <!-- /Yandex.Metrika counter -->
   </head>
 
@@ -38,21 +49,21 @@
           <div class="ring-item">
             <div class="ring-small-container">
               <div class="ring-small-progress-bar"></div>
-              <img class="ring-img-small" src="css/ring2_190/ring2_frame0000.jpg" data-imgid="1" onclick="show_photos(1);" onmouseover="mouse_on_ring(1);" onmouseout="mouse_out_ring(1);">
+              <img class="ring-img-small" src="css/ring2/ring2_frame0000.jpg" data-imgid="1" onclick="show_photos(1);" onmouseover="mouse_on_ring(1);" onmouseout="mouse_out_ring(1);">
             </div>
             <span onclick="show_photos(1);">Кольцо</span>
           </div>
           <div class="ring-item">
             <div class="ring-small-container">
               <div class="ring-small-progress-bar"></div>
-              <img class="ring-img-small" src="css/ring0_190/ring0_frame0000.jpg" data-imgid="1" onclick="show_photos(2);" onmouseover="mouse_on_ring(2);" onmouseout="mouse_out_ring(2);">
+              <img class="ring-img-small" src="css/ring0/ring0_frame0000.jpg" data-imgid="1" onclick="show_photos(2);" onmouseover="mouse_on_ring(2);" onmouseout="mouse_out_ring(2);">
             </div>
             <span onclick="show_photos(2);">Перстень</span>
           </div>
           <div class="ring-item">
             <div class="ring-small-container">
               <div class="ring-small-progress-bar"></div>
-              <img class="ring-img-small" src="css/ring1_190/ring1_frame0000.jpg" data-imgid="1" onclick="show_photos(3);" onmouseover="mouse_on_ring(3);" onmouseout="mouse_out_ring(3);">
+              <img class="ring-img-small" src="css/ring1/ring1_frame0000.jpg" data-imgid="1" onclick="show_photos(3);" onmouseover="mouse_on_ring(3);" onmouseout="mouse_out_ring(3);">
             </div>
             <span onclick="show_photos(3);">Колечко</span>
           </div>
@@ -66,8 +77,8 @@
           </div>
         </div>
         <div class="order-making-area" id="order-making-area-id">
-          <div class="container-of-all">
-            <div class="order-panel" align="center">
+          <div class="order-panel" align="center">
+            <div class="container-of-all">
               <div class="add-ring">
                 <img src="css/ring0.svg" onclick="add_ring(1);">
               </div>
@@ -77,12 +88,57 @@
               <div class="add-ring">
                 <img src="css/ring2.svg" onclick="add_ring(3);">
               </div>
-              <div class="rings-basket">
+            </div>
+            <div class="rings-packages" align="center">
+              <div class="rings-show-packages" onclick="show_packages();">
+                Наши пакеты
+              </div>
+              <div class="rings-packages-packages">
+                <div class="rings-packages-icons">
+                  <img src="css/rings_packs/pack1_round.svg" onclick="show_package(1);">
+                  <img src="css/rings_packs/pack2_round.svg" onclick="show_package(2);">
+                  <img src="css/rings_packs/pack3_round.svg" onclick="show_package(3);">
+                  <img src="css/rings_packs/pack4_round.svg" onclick="show_package(4);">
+                  <img src="css/rings_packs/pack5_round.svg" onclick="show_package(5);">
+                </div>
+                <div class="rings-package-concrete">
+                  <div class="row">
+                    <div class="rings-package-full-img" align="right">
+                      <img>
+                    </div>
+                    <div class="rings-package-descr" align="left">
+                      <h3></h3>
+                      <p></p>
+                      <span></span><br>
+                      <div>Добавить</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="container-of-all">
+              <div class="rings-all-basket">
+                <div class="rings-basket-simple">
+                </div>
+                <div class="rings-basket-packs">
+                </div>
+              </div>
+              <div class="rings-basket-calc-disc" align="left">
+                <div class="rings-disc-area">
+                  Введите свой средний балл, номер студенческого билета и получите персональную скидку!<br>
+                  Балл:<input class="discount-by-date-input mark">
+                  Номер:<input class="discount-by-date-input stud-number">
+                  <div class="discount-date-get" onclick="calc_with_disc();">
+                    Пересчитать со скидкой
+                  </div>
+                </div>
               </div>
               <div align="left" class="rings-basket-result">
                 <div>Не выбрано ни одного кольца</div>
               </div>
             </div>
+          </div>
+          <div class="container-of-all">
             <div class="contacts-panel" align="center">
               <div>
                 <div class="contact-field" align="left">

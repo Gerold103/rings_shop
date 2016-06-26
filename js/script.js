@@ -55,15 +55,23 @@ response_status_success_color = "#00CC0B";
 name_max_len = 150;
 phone_max_len = 15;
 
+total_cost_singles = 0;
+total_cost_packs = 0
+total_rings_cnt_now = 0;
+total_with_disc = false;
+
 rings_timeouts = [null, null, null];
 rings_directions = [+1, +1, +1];
 rings_images = [[], [], []];
-ring_urls = ['css/ring2_190/ring2_frame0',
-  'css/ring0_190/ring0_frame0',
-  'css/ring1_190/ring1_frame0'];
+ring_urls = ['css/ring2/ring2_frame0',
+  'css/ring0/ring0_frame0',
+  'css/ring1/ring1_frame0'];
 rings_cycle = 90;
 rings_min_photo_id = 0;
 rings_max_photo_id = 35;
+
+date_action_header = "Внимание!";
+date_action_text = 'До 1 июля действует скидка "4 средних балла"! Посчитать скидку можно в панели предзаказа';
 
 slideshow_photos = [
   [
@@ -91,7 +99,176 @@ slideshow_rings_info = [
   {id: 2, description: 'Вариант для всех и каждого, кто знает цену успеха и умеет выглядеть солидно'},
   {id: 1, description: 'Вариант для того, кто ценит дух свободы и бунтарства'},
   {id: 3, description: 'Вариант для той, кто может оценить грацию и изящество'}
-]
+];
+
+rings_packages = {
+  1: {
+    name: 'Дуэт',
+    set: [{ring: 'Перстень', count: 1}, {ring: 'Колечко', count: 1}],
+    cost: 4500,
+    info: '1 Перстень + 1 Колечко',
+    img_src: 'css/rings_packs/pack1_round.svg',
+    img_src_pressed: 'css/rings_packs/pack1_round_pressed.svg'
+  },
+  2: {
+    name: 'Триумвират',
+    set: [{ring: 'Перстень', count: 1}, {ring: 'Колечко', count: 1}, {ring: 'Кольцо', count: 1}],
+    cost: 6000,
+    info: '1 Перстень + 1 Колечко + 1 Кольцо',
+    img_src: 'css/rings_packs/pack2_round.svg',
+    img_src_pressed: 'css/rings_packs/pack2_round_pressed.svg'
+  },
+  3: {
+    name: 'Квинтет',
+    set: [{ring: 'Перстень', count: 2}, {ring: 'Колечко', count: 2}, {ring: 'Кольцо', count: 1}],
+    cost: 9000,
+    info: '2 Перстня + 2 Колечка + 1 Кольцо',
+    img_src: 'css/rings_packs/pack3_round.svg',
+    img_src_pressed: 'css/rings_packs/pack3_round_pressed.svg'
+  },
+  4: {
+    name: 'Великолепная пятерка',
+    set: [{ring: 'Перстень', count: 1}, {ring: 'Колечко', count: 1}, {ring: 'Кольцо', count: 3}],
+    cost: 10000,
+    info: '1 Перстень + 1 Колечко + 3 Кольца',
+    img_src: 'css/rings_packs/pack4_round.svg',
+    img_src_pressed: 'css/rings_packs/pack4_round_pressed.svg'
+  },
+  5: {
+    name: 'Октет',
+    set: [{ring: 'Перстень', count: 3}, {ring: 'Колечко', count: 3}, {ring: 'Кольцо', count: 2}],
+    cost: 15000,
+    info: '3 Перстня + 3 Колечка + 2 Кольца',
+    img_src: 'css/rings_packs/pack5_round.svg',
+    img_src_pressed: 'css/rings_packs/pack5_round_pressed.svg'
+  }
+};
+rings_packages_reversed = {'Дуэт': 1, 'Триумвират': 2, 'Квинтет': 3, 'Великолепная пятерка': 4, 'Октет': 5};
+
+function update_package_icons(pack_id) {
+  var icons = $(".rings-packages-icons")[0];
+  for (var i = 0; i < icons.children.length; ++i) {
+    if (i+1 == pack_id) {
+      icons.children[i].src = rings_packages[i+1]['img_src_pressed'];
+    } else {
+      icons.children[i].src = rings_packages[i+1]['img_src'];
+    }
+  }
+}
+
+prev_package_showed = 1;
+packages_is_show_now = false;
+function show_package(pack_id) {
+  prev_package_showed = pack_id;
+  pack_info = rings_packages[pack_id];
+  html_info = $(".rings-package-concrete");
+  pack_img = html_info.find(".rings-package-full-img").find("img");
+  pack_desc = html_info.find(".rings-package-descr");
+  header = pack_desc.find("h3");
+  info = pack_desc.find("p");
+  price = pack_desc.find("span");
+  button_add = pack_desc.find("div");
+
+  pack_img.attr("src", pack_info['img_src']);
+  header[0].innerHTML = pack_info['name'];
+  info[0].innerHTML = pack_info['info'];
+  price[0].innerHTML = pack_info['cost']+' Рублей';
+  button_add.unbind("click");
+  button_add.click(function() {
+    add_package(pack_id);
+  });
+  update_package_icons(pack_id);
+}
+
+function remove_pack_item(target) {
+  var parent = target.parentElement.parentElement.parentElement;
+  target = parent;
+  parent = parent.parentElement;
+  parent.remove(target);
+  show_or_hide_basket();
+  update_summary();
+}
+
+function create_pack_item(pack_id) {
+  pack_info = rings_packages[pack_id];
+  item = document.createElement('div');
+  item.className = "rings-basket-pack-item";
+  //header
+  {
+    header = document.createElement('div');
+    header.className = "rings-basket-pack-item-header";
+      row = document.createElement('div');
+      row.className = "row";
+        header_left = document.createElement('div');
+        header_left.className = "rings-basket-pack-header-left";
+        header_left.setAttribute("align", "left");
+          img_close = document.createElement('img');
+          img_close.src = "css/rings_packs/huge_close.svg";
+          img_close.addEventListener("click", function(event) {
+            remove_pack_item(event.target);
+          });
+        header_left.appendChild(img_close);
+          pack_name = document.createElement('h3');
+          pack_name.setAttribute("data-pack-id", pack_id);
+          pack_name.innerHTML = 'Пакет "'+pack_info['name']+'"';
+        header_left.appendChild(pack_name);
+      row.appendChild(header_left);
+        header_right = document.createElement('div');
+        header_right.className = "rings-basket-pack-header-right";
+        header_right.setAttribute("align", "right");
+          material_selecter = create_strings_selecter("Материал",
+            materials, "", "rings-basket-material-arrow");
+        header_right.appendChild(material_selecter);
+      row.appendChild(header_right);
+    header.appendChild(row);
+    item.appendChild(header);
+  }
+  {
+    body = document.createElement('div');
+    body.className = "rings-basket-pack-item-body";
+    variants = pack_info['set'];
+    for (var i = 0; i < variants.length; ++i) {
+      next = variants[i];
+      for (var j = 0; j < next['count']; ++j) {
+        row = document.createElement('row');
+        row.className = "row";
+          first = document.createElement('div');
+          first.className = "rings-basket-pack-body-item";
+          first.setAttribute("align", "right");
+          first.innerHTML = next['ring'];
+        row.appendChild(first);
+          second = document.createElement('div');
+          second.className = "rings-basket-pack-body-item";
+          second.setAttribute("align", "left");
+            size_selecter = create_strings_selecter('Размер',
+              rings_sizes[next['ring']], "", "rings-basket-size-arrow");
+          second.appendChild(size_selecter);
+        row.appendChild(second);
+        body.appendChild(row);
+      }
+    }
+    item.appendChild(body);
+  }
+  return item;
+}
+
+function add_package(pack_id) {
+  packs_block = $(".rings-basket-packs");
+  block = create_pack_item(pack_id);
+  packs_block.append(block);
+  show_or_hide_basket();
+  update_summary();
+}
+
+function show_packages() {
+  if (!packages_is_show_now) {
+    show_package(prev_package_showed);
+    $(".rings-packages-packages").slideDown(1000);
+  } else {
+    $(".rings-packages-packages").slideUp(1000);
+  }
+  packages_is_show_now = !packages_is_show_now;
+}
 
 function get_str_ring_rolle_id(num_id) {
   if (num_id < 10)
@@ -166,7 +343,7 @@ function rolle_ring(ring_id) {
   current_number = parseInt(target.attr("data-imgid"));
   direction = get_ring_direction(ring_id);
   current_number += direction;
-  if (current_number >= rings_max_photo_id) {
+  if (current_number > rings_max_photo_id) {
     current_number = rings_min_photo_id;
   }
   if (is_time_to_finish_roll(current_number, ring_id)) {
@@ -231,6 +408,16 @@ function show_photos(photo_number) {
     description = document.createElement('p');
     description.innerHTML = slideshow_rings_info[photo_number]['description'];
     slide_text.append(description);
+
+    action_header = document.createElement('h3');
+    action_header.className = "slides-action-header";
+    action_header.innerHTML = date_action_header;
+    slide_text.append(action_header);
+
+    action_text = document.createElement('p');
+    action_text.className = "slides-action-text";
+    action_text.innerHTML = date_action_text;
+    slide_text.append(action_text);
 
   slide_photos = $(".slide-photos");
   slide_photos.empty();
@@ -334,8 +521,52 @@ function aggregate_one_rings_set(set) {
   return {'type': type, 'size': size, 'count': count, 'material': material};
 }
 
-function update_summary() {
-  basket = $(".rings-basket");
+function aggregate_one_rings_pack(pack_) {
+  var pack = $(pack_);
+  var pack_id = pack.find(".rings-basket-pack-header-left")[0].children[1].getAttribute("data-pack-id");
+  console.log(pack_id);
+  var selecter = pack.find("select")[0];
+  var material = selecter.options[selecter.selectedIndex].text;
+  var rings = [];
+  var body = pack.find(".rings-basket-pack-item-body")[0];
+  for (var i = 0; i < body.children.length; ++i) {
+    var next_row = body.children[i];
+    var ring_name = next_row.children[0].innerHTML;
+    selecter = $(next_row).find("select")[0];
+    var ring_size = parseFloat(selecter.value);
+    rings.push({'ring': ring_name, 'size': ring_size});
+  }
+  return {'id': pack_id, 'material': material, 'rings': rings};
+}
+
+function get_disc_info() {
+  var disc = $(".rings-disc-area");
+  var mark = parseFloat(disc.find(".mark").val());
+  var number = parseInt(disc.find(".stud-number").val());
+  return {'mark': mark, 'number': number};
+}
+
+function calc_with_disc() {
+  if (total_with_disc) return;
+  var values = get_disc_info();
+  if (isNaN(values['number']) || isNaN(values['mark']) ||
+    (values['number'] <= 0) || (values['mark'] <= 2) || (values['mark'] > 5)) return;
+  total_cost_singles = total_cost_singles * (1 - (values['mark']*4.0)/100.0);
+  show_total_check();
+  total_with_disc = true;
+}
+
+function show_discount() {
+  $(".rings-basket-calc-disc").show();
+}
+
+function hide_discount() {
+  $(".rings-basket-calc-disc").hide();
+}
+
+function get_count_and_cost_simple_basket()
+{
+  basket = $(".rings-basket-simple");
   rings_cnt = 0;
   cost = 0;
   target = $(".rings-basket-result");
@@ -346,28 +577,60 @@ function update_summary() {
     type = values['type'];
     material = values['material'];
     if (count < 0) {
+      hide_discount();
       target.html("<div>Ошибка ввода</div>");
-      return;
+      return {};
     }
     size = parseFloat(values['size']);
     if (isNaN(size) || (size <= 0)) {
+        hide_discount();
         target.html("<div>Ошибка ввода</div>");
-        return;  
+        return {};  
     }
     rings_cnt += count;
     cost += costs[type][material] * count;
   }
   if (!is_number(rings_cnt) || !is_number(cost) || (rings_cnt < 0) || (cost < 0)) {
+    hide_discount();
     target.html("<div>Ошибка ввода</div>")
-    return;
+    return {};
   }
-  if (rings_cnt == 0) {
-    target.html("<div>Не выбрано ни одного кольца</div>");
-    return;
+  return {'count': rings_cnt, 'cost': cost};
+}
+
+function get_count_and_cost_packed_basket()
+{
+  basket = $(".rings-basket-packs");
+  rings_cnt = 0;
+  cost = 0;
+  target = $(".rings-basket-result");
+  for (i = 0; i < basket.children().length; ++i) {
+    rings_pack = basket.children()[i];
+    values = aggregate_one_rings_pack(rings_pack);
+    count = values['rings'].length;
+    if (count < 0) {
+      hide_discount();
+      target.html("<div>Ошибка ввода</div>");
+      return {};
+    }
+    rings_cnt += count;
+    cost += rings_packages[values['id']]['cost'];
   }
-  target.html('<div>Всего выбрано колец: <span id="rings-count-id">' + rings_cnt + '</span> на сумму'+ 
+  if (!is_number(rings_cnt) || !is_number(cost) || (rings_cnt < 0) || (cost < 0)) {
+    hide_discount();
+    target.html("<div>Ошибка ввода</div>")
+    return {};
+  }
+  return {'count': rings_cnt, 'cost': cost};
+}
+
+function show_total_check() {
+  var target = $(".rings-basket-result");
+  total_cost_now = total_cost_singles + total_cost_packs;
+  total_cost_now = parseInt(total_cost_now);
+  target.html('<div>Всего выбрано колец: <span id="rings-count-id">' + total_rings_cnt_now + '</span> на сумму'+ 
           '<span class="rings-basket-result-price">'+
-            cost + '<img src="css/ruble.svg">'+
+            total_cost_now + '<img src="css/ruble.svg">'+
           '</span>'+
         '</div>'+
         '<div class="rings-basket-result-ps">'+
@@ -376,8 +639,29 @@ function update_summary() {
   );
 }
 
+function update_summary() {
+  total_cost_singles = 0;
+  total_cost_packs = 0;
+  total_rings_cnt_now = 0;
+  total_with_disc = false;
+  var target = $(".rings-basket-result");
+  var simple_rings = get_count_and_cost_simple_basket();
+  var packed_rings = get_count_and_cost_packed_basket();
+  var rings_cnt = simple_rings['count'] + packed_rings['count'];
+  if (rings_cnt == 0) {
+    hide_discount();
+    target.html("<div>Не выбрано ни одного кольца</div>");
+    return;
+  }
+  show_discount();
+  total_cost_singles = simple_rings['cost'];
+  total_cost_packs = packed_rings['cost'];
+  total_rings_cnt_now = rings_cnt;
+  show_total_check();
+}
+
 function aggregate_rings_for_sending() {
-  basket = $(".rings-basket");
+  basket = $(".rings-basket-simple");
   result = [];
   for (i = 0; i < basket.children().length; ++i) {
     rings_set = basket.children()[i];
@@ -395,15 +679,37 @@ function aggregate_rings_for_sending() {
   return result;
 }
 
+function aggregate_packs_for_sending() {
+  var basket = $(".rings-basket-packs");
+  var result= [];
+  for (var i = 0; i < basket.children().length; ++i) {
+    var rings_pack = basket.children()[i];
+    var values = aggregate_one_rings_pack(rings_pack);
+    if (values['id'] <= 0) {
+      return false;
+    }
+    result.push(values);
+  }
+  return result;
+}
+
+function show_or_hide_basket() {
+  simple_rings = $(".rings-basket-simple");
+  packed_rings = $(".rings-basket-packs");
+  childs = simple_rings[0].childElementCount + packed_rings[0].childElementCount;
+  if (childs == 0) {
+    $(".rings-all-basket").css({'visibility': 'hidden'});
+  } else {
+    $(".rings-all-basket").css({'visibility': 'visible'});
+  }
+}
+
 function remove_ring(event) {
   target = event.target;
   result = target.parentElement;
   parent = result.parentElement;
   parent.remove(result);
-  parent = $(".rings-basket").first()[0];
-  if (parent.children.length == 0) {
-    $(parent).css({'visibility': 'hidden'});
-  }
+  show_or_hide_basket();
   update_summary();
 }
 
@@ -465,10 +771,12 @@ function create_number_selecter(label, start, type) {
   return result;
 }
 
-function create_strings_selecter(label, variants) {
+function create_strings_selecter(label, variants, label_class, arrow_class) {
   result = document.createElement('span');
     span_label = document.createElement('span');
-    span_label.className = "selecter-label";
+    if (!label_class) label_class = "selecter-label";
+    if (!arrow_class) arrow_class = "ring-select-arrow-down-middle";
+    span_label.className = label_class;
     span_label.innerHTML = label;
     result.appendChild(span_label);
 
@@ -483,7 +791,7 @@ function create_strings_selecter(label, variants) {
       span_selecter.appendChild(select);
 
       arrow = document.createElement('div');
-      arrow.className = "ring-select-arrow-down-middle";
+      arrow.className = arrow_class;
       span_selecter.appendChild(arrow);
     result.appendChild(span_selecter);
   return result;
@@ -518,9 +826,9 @@ function create_ring_busket_item(id) {
 
 function add_ring(id) {
   item = create_ring_busket_item(id);
-  basket = $(".rings-basket");
+  basket = $(".rings-basket-simple");
   basket.append(item);
-  basket.css({'visibility': 'visible'});
+  $(".rings-all-basket").css({'visibility': 'visible'});
   update_summary();
 }
 
@@ -580,25 +888,29 @@ function send_info() {
   if (!validate_form()) {
     return;
   }
-  button = $("#make-order-btn-id");
-  local_server = getXmlHttp();
+  var button = $("#make-order-btn-id");
+  var local_server = getXmlHttp();
   var fd = new FormData();
-  name = $("#customer-name").val();
-  phone = $("#customer-phone").val();
-  email = $("#customer-email").val();
+  var name = $("#customer-name").val();
+  var phone = $("#customer-phone").val();
+  var email = $("#customer-email").val();
     fd.append("name", name);
     fd.append("phone", phone);
     fd.append("email", email);
-    rings = aggregate_rings_for_sending();
+    var rings = aggregate_rings_for_sending();
+    var packs = aggregate_packs_for_sending();
+    var discounts = get_disc_info();
     if (rings === false) {
       show_response_status(response_status_error_color, 'Ошибка ввода данных');
       return;
     }
-    if (rings.length == 0) {
+    if ((rings.length == 0) && (packs.length == 0)) {
       show_response_status(response_status_error_color, 'Вы не выбрали кольцо');
       return;
     }
     fd.append("content", JSON.stringify(rings));
+    fd.append("packs", JSON.stringify(packs));
+    fd.append("discounts", JSON.stringify(discounts));
     local_server.onreadystatechange = function() {
       if (local_server.readyState == 4) {
         button.html("ЗАКАЗАТЬ");

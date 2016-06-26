@@ -52,4 +52,48 @@ SOFTWARE.
   $ring_materials_ids = ['Серебро' => 1];
   //$ring_materials_ids_reversed = [1 => 'Серебро', 2 => 'Бумага', 3 => 'Ничего'];
   $ring_materials_ids_reversed = [1 => 'Серебро'];
+
+  $rings_packages = [
+    1 => [
+      'name' => 'Дуэт',
+      'set' => [['ring' => 'Перстень', 'count' => 1], ['ring' => 'Колечко', 'count' => 1]],
+      'cost' => 4500,
+      'info' => '1 Перстень + 1 Колечко',
+      'img_src' => 'css/rings_packs/pack1_round.svg',
+      'img_src_pressed' => 'css/rings_packs/pack1_round_pressed.svg'
+    ],
+    2 => [
+      'name' => 'Триумвират',
+      'set' => [['ring' => 'Перстень', 'count' => 1], ['ring' => 'Колечко', 'count' => 1], ['ring' => 'Кольцо', 'count' => 1]],
+      'cost' => 6000,
+      'info' => '1 Перстень + 1 Колечко + 1 Кольцо',
+      'img_src' => 'css/rings_packs/pack2_round.svg',
+      'img_src_pressed' => 'css/rings_packs/pack2_round_pressed.svg'
+    ],
+    3 => [
+      'name' => 'Квинтет',
+      'set' => [['ring' => 'Перстень', 'count' => 2], ['ring' => 'Колечко', 'count' => 2], ['ring' => 'Кольцо', 'count' => 1]],
+      'cost' => 9000,
+      'info' => '2 Перстня + 2 Колечка + 1 Кольцо',
+      'img_src' => 'css/rings_packs/pack3_round.svg',
+      'img_src_pressed' => 'css/rings_packs/pack3_round_pressed.svg'
+    ],
+    4 => [
+      'name' => 'Великолепная пятерка',
+      'set' => [['ring' => 'Перстень', 'count' => 1], ['ring' => 'Колечко', 'count' => 1], ['ring' => 'Кольцо', 'count' => 3]],
+      'cost' => 10000,
+      'info' => '1 Перстень + 1 Колечко + 3 Кольца',
+      'img_src' => 'css/rings_packs/pack4_round.svg',
+      'img_src_pressed' => 'css/rings_packs/pack4_round_pressed.svg'
+    ],
+    5 => [
+      'name' => 'Октет',
+      'set' => [['ring' => 'Перстень', 'count' => 3], ['ring' => 'Колечко', 'count' => 3], ['ring' => 'Кольцо', 'count' => 2]],
+      'cost' => 15000,
+      'info' => '3 Перстня + 3 Колечка + 2 Кольца',
+      'img_src' => 'css/rings_packs/pack5_round.svg',
+      'img_src_pressed' => 'css/rings_packs/pack5_round_pressed.svg'
+    ]
+  ];
+  $rings_packages_reversed = ['Дуэт' => 1, 'Триумвират' => 2, 'Квинтет' => 3, 'Великолепная пятерка' => 4, 'Октет' => 5];
 ?>

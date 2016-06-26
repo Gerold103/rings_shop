@@ -37,6 +37,8 @@ SOFTWARE.
           <a href="?page=1&date_order=asc"><button>По возр.</button></a>
         </td>
         <td>Заказ</td>
+        <td>Скидки</td>
+        <td>Пакеты</td>
         <td>Отметить как выполненный</td>
       </tr>
       <?php
@@ -52,13 +54,37 @@ SOFTWARE.
             $preorder = $preorders[$i]['order'];
             for ($j = 0, $szj = count($preorder); $j < $szj; ++$j) {
           ?>
-            Тип: <?php echo $preorder[$j]['type']; ?>;
-            Размер: <?php echo $preorder[$j]['size']; ?><br>
-            Материал: <?php echo $preorder[$j]['material']; ?>;
-            Количество: <?php echo $preorder[$j]['count']; ?>
+            <b>Тип:</b> <?php echo $preorder[$j]['type']; ?>;
+            <b>Размер:</b> <?php echo $preorder[$j]['size']; ?><br>
+            <b>Материал:</b> <?php echo $preorder[$j]['material']; ?>;
+            <b>Количество:</b> <?php echo $preorder[$j]['count']; ?>
             <?php if ($j + 1 < $szj) { ?>
               <br><br>
             <?php } ?>
+          <?php
+            }
+          ?></td>
+          <td><?php
+            $discs = $preorders[$i]['discs'];
+            for ($j = 0, $szj = count($discs); $j < $szj; ++$j) {
+              echo $discs[$j];
+              if ($j + 1 < $szj) echo '<br>';
+            }
+          ?></td>
+          <td><?php
+            $packs = $preorders[$i]['packs'];
+            for ($j = 0, $szj = count($packs); $j < $szj; ++$j) {
+          ?>
+            <b>Тип:</b> <?php echo $packs[$j]['type']; ?>;<br>
+            <b>Материал:</b> <?php echo $packs[$j]['material']; ?>;<br>
+            <b>Кольца:</b><br> <?php
+              $rings = $packs[$j]['rings'];
+              for ($k = 0, $szk = count($rings); $k < $szk; ++$k) {
+                echo $rings[$k]['ring'].': '.$rings[$k]['size'];
+                if ($k + 1 < $szk) echo '<br>';
+              }
+              if ($j + 1 < $szj) echo '<br><br>';
+            ?>
           <?php
             }
           ?></td>

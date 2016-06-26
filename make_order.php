@@ -33,8 +33,18 @@ SOFTWARE.
 		exit();
 	}
 	$all_rings = json_decode($_POST['content'], true);
-	if ($all_rings == NULL) {
+	if ($all_rings === NULL) {
 		echo json_encode(['warning' => 'Ошибка ввода данных']);
+		exit();
+	}
+	$all_packs = json_decode($_POST['packs'], true);
+	if ($all_packs === NULL) {
+		echo json_encode(['warning' => 'Ошибка ввода данных по пакетам']);
+		exit();
+	}
+	$all_discs = json_decode($_POST['discounts'], true);
+	if ($all_discs === NULL) {
+		echo json_encode(['warning' => 'Ошибка ввода данных по скидкам']);
 		exit();
 	}
 	$walk_through_rings = function($callback) {
@@ -84,7 +94,6 @@ SOFTWARE.
 	else $email = "'$email'";
 
 	//------------------------------------------------------BEGIN TRANSACTION
-	//$rc = $db_connection->begin_transaction();
 	$rc = $db_connection->autocommit(false);
 	if (!$rc) {
 		echo json_encode(['error' => mysqli_error($db_connection)]);
@@ -93,6 +102,7 @@ SOFTWARE.
 
 	$rc = $db_connection->query("INSERT INTO preorders(name, phone, email)".
 		" VALUES ('$name', '$phone', $email)");
+
 	if (!$rc) {
 		if (mysqli_errno($db_connection) == 1062) { //error duplicate rows
 			echo json_encode(['warning' => 'Предзаказ с такими '.
@@ -127,6 +137,75 @@ SOFTWARE.
 		$db_connection->rollback();
 		exit();
 	}
+
+	//--------------------process discounts
+
+	if (count($all_discs)) {
+		if (isset($all_discs['mark']) && isset($all_discs['number'])) {
+			$mark = $all_discs['mark'];
+			$number = $all_discs['number'];
+			if (($mark > 2) && ($mark <= 5)) {
+				$rc = $db_connection->query("INSERT INTO mark_discounts (".
+					"preorder_id, mark, stud_number) VALUES (".
+					"$insert_id, $mark, $number)");
+				if (!$rc) {
+					echo json_encode(['error' => mysqli_error($db_connection)]);
+					exit();
+				}
+			}
+		}
+	}
+
+	//-------------------process packages
+
+	if (count($all_packs)) {
+		for ($i = 0, $sz = count($all_packs); $i < $sz; ++$i) {
+			$pack = $all_packs[$i];
+			if (!isset($rings_packages[$pack['id']])) {
+				echo json_encode(['warning' => 'Ошибка заказа пакета']);
+				exit();
+			}
+			$pack_id = $pack['id'];
+			$pack_info = $rings_packages[$pack_id];
+			if (!isset($ring_materials_ids[$pack['material']])) {
+				echo json_encode(['warning' => 'Ошибка заказа пакета']);
+				exit();
+			}
+			$material = $ring_materials_ids[$pack['material']];
+			$rc = $db_connection->query("INSERT INTO rings_packs (".
+				"preorder_id, pack_id, material) VALUES (".
+				"$insert_id, $pack_id, $material)");
+			if (!$rc) {
+				echo json_encode(['error' => mysqli_error($db_connection)]);
+				exit();
+			}
+			$pack_insert_id = $db_connection->insert_id;
+			$pack_rings = $pack['rings'];
+			for ($j = 0, $szj = count($pack_rings); $j < $szj; ++$j) {
+				$next_ring = $pack_rings[$j];
+				$type = $next_ring['ring'];
+				$size = $next_ring['size'];
+				if (!isset($ring_types_ids[$type])) {
+					echo json_encode(['warning' => 'Ошибка заказа пакета']);
+					exit();
+				}
+				$type = $ring_types_ids[$type];
+				if ($size <= 0) {
+					echo json_encode(['warning' => 'Ошибка заказа пакета']);
+					exit();
+				}
+				$rc = $db_connection->query("INSERT INTO rings_pack_items (".
+					"rings_pack_id, type, size) VALUES (".
+					"$pack_insert_id, $type, $size)");
+				if (!$rc) {
+					echo json_encode(['warning' => 'Ошибка заказа пакета']);
+					exit();
+				}
+			}
+		}
+	}
+
+
 	/*
 CREATE TABLE `preorders` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -150,8 +229,37 @@ CREATE TABLE `rings_sets` (
   `count` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `preorder_idx` (`preorder_id`),
-  CONSTRAINT `rings_sets_ibfk_1` FOREIGN KEY (`preorder_id`) REFERENCES `preorders` (`id`) ON DELETE CASCADE
-)*/
+  CONSTRAINT FOREIGN KEY (`preorder_id`) REFERENCES `preorders` (`id`) ON DELETE CASCADE
+)
+
+CREATE TABLE mark_discounts (
+  id int NOT NULL AUTO_INCREMENT,
+  preorder_id int NOT NULL,
+  mark float NOT NULL,
+  stud_number bigint NOT NULL,
+  PRIMARY KEY (id),
+  UNIQUE KEY stud_num_idx (stud_number),
+  CONSTRAINT FOREIGN KEY (preorder_id) REFERENCES preorders (id) ON DELETE CASCADE
+)
+
+CREATE TABLE rings_packs (
+  id int NOT NULL AUTO_INCREMENT,
+  preorder_id int NOT NULL,
+  pack_id int NOT NULL,
+  material int NOT NULL,
+  PRIMARY KEY (id),
+  CONSTRAINT FOREIGN KEY (preorder_id) REFERENCES preorders (id) ON DELETE CASCADE
+)
+
+CREATE TABLE rings_pack_items (
+  id int NOT NULL AUTO_INCREMENT,
+  rings_pack_id int NOT NULL,
+  type int NOT NULL,
+  size float NOT NULL,
+  PRIMARY KEY (id),
+  CONSTRAINT FOREIGN KEY (rings_pack_id) REFERENCES rings_packs (id) ON DELETE CASCADE
+)
+*/
 	$db_connection->commit();
 	$db_connection->close();
 	echo json_encode(['response' => 'ok']);
