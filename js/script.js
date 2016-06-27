@@ -577,8 +577,9 @@ function calc_with_disc() {
     target.html("<div>Ошибка ввода номера студенческого билета</div>");
     return;
   }
+  var difference = Math.min(4, Math.max(0, current_year - year));
 
-  total_cost_singles = total_cost_singles * (1 - (values['mark']*(current_year - year))/100.0);
+  total_cost_singles = total_cost_singles * (1 - (values['mark']*difference)/100.0);
   show_total_check();
   total_with_disc = true;
 }
