@@ -48,6 +48,7 @@ rings_sizes = {
 };
 
 start_ring_size = 16.5;
+max_rings_count = 30;
 
 response_status_error_color = "#BD0002";
 response_status_success_color = "#00CC0B";
@@ -681,6 +682,11 @@ function update_summary() {
   if (rings_cnt == 0) {
     hide_discount();
     target.html("<div>Не выбрано ни одного кольца</div>");
+    return;
+  }
+  if (rings_cnt > max_rings_count) {
+    hide_discount();
+    target.html("<div>Нельзя выбрать более "+max_rings_count.toString()+" колец</div>");
     return;
   }
   show_discount();
