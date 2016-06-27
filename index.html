@@ -126,8 +126,8 @@
               <div class="rings-basket-calc-disc" align="left">
                 <div class="rings-disc-area">
                   Введите свой средний балл, номер студенческого билета и получите персональную скидку!<br>
-                  Балл:<input class="discount-by-date-input mark">
-                  Номер:<input class="discount-by-date-input stud-number">
+                  Балл:<input class="discount-by-date-input mark" oninput="total_with_disc=false; update_summary();">
+                  Номер:<input class="discount-by-date-input stud-number" oninput="total_with_disc=false; update_summary();">
                   <div class="discount-date-get" onclick="calc_with_disc();">
                     Пересчитать со скидкой
                   </div>

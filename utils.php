@@ -96,4 +96,9 @@ SOFTWARE.
     ]
   ];
   $rings_packages_reversed = ['Дуэт' => 1, 'Триумвират' => 2, 'Квинтет' => 3, 'Великолепная пятерка' => 4, 'Октет' => 5];
+
+  function validate_stud_number($number) {
+    return ($number[0] == '0') || ($number[0] == '2');
+  }
+  
 ?>

@@ -143,7 +143,11 @@ SOFTWARE.
 	if (count($all_discs)) {
 		if (isset($all_discs['mark']) && isset($all_discs['number'])) {
 			$mark = $all_discs['mark'];
-			$number = $all_discs['number'];
+			$number = ''.$all_discs['number'];
+			if (!validate_stud_number($number)) {
+				echo json_encode(['warning' => 'Ошибка ввода номера студенческого билета']);
+				exit();
+			}
 			if (($mark > 2) && ($mark <= 5)) {
 				$rc = $db_connection->query("INSERT INTO mark_discounts (".
 					"preorder_id, mark, stud_number) VALUES (".
@@ -152,6 +156,9 @@ SOFTWARE.
 					echo json_encode(['error' => mysqli_error($db_connection)]);
 					exit();
 				}
+			} else {
+				echo json_encode(['warning' => 'Ошибка ввода среднего балла']);
+				exit();
 			}
 		}
 	}

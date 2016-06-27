@@ -549,9 +549,31 @@ function get_disc_info() {
 function calc_with_disc() {
   if (total_with_disc) return;
   var values = get_disc_info();
-  if (isNaN(values['number']) || isNaN(values['mark']) ||
-    (values['number'] <= 0) || (values['mark'] <= 2) || (values['mark'] > 5)) return;
-  total_cost_singles = total_cost_singles * (1 - (values['mark']*4.0)/100.0);
+  var target = $(".rings-basket-result");
+  if (isNaN(values['number']) || isNaN(values['mark']) || (values['number'] <= 0)) {
+    target.html("<div>Ошибка ввода данных для скидки</div>");
+    return;
+  }
+  if ((values['mark'] <= 2) || (values['mark'] > 5)) {
+    target.html("<div>Ошибка ввода среднего балла</div>");
+    return;
+  }
+  var stud_number = values['number'];
+  var stud_number_str = stud_number.toString();
+  var year = 2000;
+  var current_year = new Date().getFullYear();
+  if (stud_number_str[0] == '0') {
+    var year_str = stud_number_str[2]+stud_number_str[3];
+    year += parseInt(year_str);
+  } else if (stud_number_str[0] == '2') {
+    var year_str = stud_number_str[1]+stud_number_str[2];
+    year += parseInt(year_str);
+  } else {
+    target.html("<div>Ошибка ввода номера студенческого билета</div>");
+    return;
+  }
+
+  total_cost_singles = total_cost_singles * (1 - (values['mark']*(current_year - year))/100.0);
   show_total_check();
   total_with_disc = true;
 }
