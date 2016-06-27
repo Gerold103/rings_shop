@@ -679,6 +679,11 @@ function update_summary() {
   var simple_rings = get_count_and_cost_simple_basket();
   var packed_rings = get_count_and_cost_packed_basket();
   var rings_cnt = simple_rings['count'] + packed_rings['count'];
+  if (isNaN(rings_cnt)) {
+    hide_discount();
+    target.html("<div>Ошибка ввода данных</div>");
+    return;
+  }
   if (rings_cnt == 0) {
     hide_discount();
     target.html("<div>Не выбрано ни одного кольца</div>");
