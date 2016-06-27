@@ -400,7 +400,7 @@ function show_photos(photo_number) {
 
     price = document.createElement('div');
     local_costs = costs[ring_name];
-    price.innerHTML = materials[0]+': '+local_costs[materials[0]]+'<br>';
+    price.innerHTML = materials[0]+': '+local_costs[materials[0]]+' <img src="css/ruble.svg"><br>';
     //price.innerHTML += materials[1]+': '+local_costs[materials[1]]+'<br>';
     //price.innerHTML += materials[2]+': '+local_costs[materials[2]];
     slide_text.append(price);

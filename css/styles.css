@@ -108,6 +108,11 @@ a:link, a:visited, a:hover, a:active {
   font-size: 18px;
 }
 
+.slide-text img {
+  height: 15px;
+  margin-left: 3px;
+}
+
 .slide-photos {
   display: inline-block;
   z-index: inherit;
