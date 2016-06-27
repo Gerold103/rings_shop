@@ -269,8 +269,10 @@ function show_packages() {
   if (!packages_is_show_now) {
     show_package(prev_package_showed);
     $(".rings-packages-packages").slideDown(1000);
+    $(".rings-show-packages").addClass("active", 1000);
   } else {
     $(".rings-packages-packages").slideUp(1000);
+    $(".rings-show-packages").removeClass("active", 1000);
   }
   packages_is_show_now = !packages_is_show_now;
 }

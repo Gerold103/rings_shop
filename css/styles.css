@@ -334,13 +334,18 @@ a:link, a:visited, a:hover, a:active {
 .rings-show-packages {
   font-size: 25px;
   background-color: black;
-  color: white;
+  color: #34c3e7;
+  border: #34c3e7 3px solid;
   display: inline-block;
   padding: 7px;
   padding-right: 45px;
   padding-left: 45px;
   border-radius: 8px 8px 8px 8px;
   cursor: pointer;
+}
+
+.rings-show-packages.active {
+  border-color: black;
 }
 
 .rings-packages-assort {
