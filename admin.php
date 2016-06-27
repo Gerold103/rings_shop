@@ -50,6 +50,14 @@ SOFTWARE.
 			exit();
 		}
 	}
+	if (isset($_GET['delete'])) {
+		$id = $_GET['delete'];
+		$rc = $db_connection->query("DELETE FROM preorders WHERE id = $id");
+		if (!$rc) {
+			echo 'Error: '.mysqli_error($db_connection);
+			exit();
+		}
+	}
 	$offset = ($page - 1) * preorders_per_page;
 	$rc = $db_connection->query("SELECT * FROM preorders WHERE done = 0 ORDER BY ".
 		"creating_time $date_order LIMIT $limit OFFSET $offset");

@@ -39,7 +39,7 @@ SOFTWARE.
         <td>Заказ</td>
         <td>Скидки</td>
         <td>Пакеты</td>
-        <td>Отметить как выполненный</td>
+        <td>Действия</td>
       </tr>
       <?php
         for ($i = 0, $sz = count($preorders); $i < $sz; ++$i) {
@@ -91,6 +91,9 @@ SOFTWARE.
           <td>
             <a href="?page=<?php echo $page; ?>&done=<?php echo $preorders[$i]['id']; ?>">
               <button>Выполнен</button>
+            </a>
+            <a href="?page=<?php echo $page; ?>&delete=<?php echo $preorders[$i]['id']; ?>" onclick="return confirm('Вы уверены?');">
+              <button>Удалить</button>
             </a>
           </td>
         </tr>
