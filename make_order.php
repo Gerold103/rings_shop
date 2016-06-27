@@ -291,7 +291,10 @@ CREATE TABLE rings_pack_items (
 	$headers = 'From: CMC-RINGS-ADMIN <admin@cmc-rings.ru>'.PHP_EOL.
 		'Reply-To: <admin@cmc-rings.ru>'.PHP_EOL.'X-Mailer: PHP/'.phpversion().'MIME-Version: 1.0'.PHP_EOL.
 		'Content-type: text/html; charset=UTF-8'.PHP_EOL;
-	mail($email, $subject, $message, $headers, '-f admin@cmc-rings.ru');
+	if (!mail('admin@cmc-rings.ru', $subject, $message, $headers, '-f admin@cmc-rings.ru')) {
+		echo json_encode(['error' => error_get_last()]);
+		exit();
+	}
 
 	$db_connection->commit();
 	$db_connection->close();
