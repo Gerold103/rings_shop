@@ -278,6 +278,21 @@ CREATE TABLE rings_pack_items (
   CONSTRAINT FOREIGN KEY (rings_pack_id) REFERENCES rings_packs (id) ON DELETE CASCADE
 )
 */
+	$subject = 'Новый заказ на cmc-rings.ru';
+	$message = '<html>';
+	$message .= 	'<head><title>Новый заказ на cmc-rings.ru</title></head>';
+	$message .= 	'<body>';
+	$message .= 		'<table width="100%" align="center">';
+	$message .= 			"<tr><td>Имя: $name; Телефон: $phone; Почта: $email</td></tr>";
+	$message .= 			'<tr><td>Детали в меню администратора.</td></tr>';
+	$message .= 		'</table>';
+	$message .= 	'</body>';
+	$message .= '</html>';
+	$headers = 'From: CMC-RINGS-ADMIN <admin@cmc-rings.ru>'.PHP_EOL.
+		'Reply-To: <admin@cmc-rings.ru>'.PHP_EOL.'X-Mailer: PHP/'.phpversion().'MIME-Version: 1.0'.PHP_EOL.
+		'Content-type: text/html; charset=UTF-8'.PHP_EOL;
+	mail($email, $subject, $message, $headers, '-f admin@cmc-rings.ru');
+
 	$db_connection->commit();
 	$db_connection->close();
 	echo json_encode(['response' => 'ok']);
