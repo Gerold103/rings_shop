@@ -71,7 +71,7 @@ rings_min_photo_id = 0;
 rings_max_photo_id = 35;
 
 date_action_header = "Внимание!";
-date_action_text = 'До 1 июля действует "студенческая скидка"! Посчитать скидку можно в панели предзаказа';
+date_action_text = 'До 1 июля действует студенческая скидка! Посчитать скидку можно в панели предзаказа';
 
 slideshow_photos = [
   [
@@ -107,7 +107,8 @@ rings_packages = {
     set: [{ring: 'Перстень', count: 1}, {ring: 'Колечко', count: 1}],
     cost: 4500,
     info: '1 Перстень + 1 Колечко',
-    img_src: 'css/rings_packs/pack1_round.svg',
+    img_icon: 'css/rings_packs/pack1_round.svg',
+    img_src: 'css/rings_packs/pack1.svg',
     img_src_pressed: 'css/rings_packs/pack1_round_pressed.svg'
   },
   2: {
@@ -115,7 +116,8 @@ rings_packages = {
     set: [{ring: 'Перстень', count: 1}, {ring: 'Колечко', count: 1}, {ring: 'Кольцо', count: 1}],
     cost: 6000,
     info: '1 Перстень + 1 Колечко + 1 Кольцо',
-    img_src: 'css/rings_packs/pack2_round.svg',
+    img_icon: 'css/rings_packs/pack2_round.svg',
+    img_src: 'css/rings_packs/pack2.svg',
     img_src_pressed: 'css/rings_packs/pack2_round_pressed.svg'
   },
   3: {
@@ -123,7 +125,8 @@ rings_packages = {
     set: [{ring: 'Перстень', count: 2}, {ring: 'Колечко', count: 2}, {ring: 'Кольцо', count: 1}],
     cost: 9000,
     info: '2 Перстня + 2 Колечка + 1 Кольцо',
-    img_src: 'css/rings_packs/pack3_round.svg',
+    img_icon: 'css/rings_packs/pack3_round.svg',
+    img_src: 'css/rings_packs/pack3.svg',
     img_src_pressed: 'css/rings_packs/pack3_round_pressed.svg'
   },
   4: {
@@ -131,7 +134,8 @@ rings_packages = {
     set: [{ring: 'Перстень', count: 1}, {ring: 'Колечко', count: 1}, {ring: 'Кольцо', count: 3}],
     cost: 10000,
     info: '1 Перстень + 1 Колечко + 3 Кольца',
-    img_src: 'css/rings_packs/pack4_round.svg',
+    img_icon: 'css/rings_packs/pack4_round.svg',
+    img_src: 'css/rings_packs/pack4.svg',
     img_src_pressed: 'css/rings_packs/pack4_round_pressed.svg'
   },
   5: {
@@ -139,7 +143,8 @@ rings_packages = {
     set: [{ring: 'Перстень', count: 3}, {ring: 'Колечко', count: 3}, {ring: 'Кольцо', count: 2}],
     cost: 15000,
     info: '3 Перстня + 3 Колечка + 2 Кольца',
-    img_src: 'css/rings_packs/pack5_round.svg',
+    img_icon: 'css/rings_packs/pack5_round.svg',
+    img_src: 'css/rings_packs/pack5.svg',
     img_src_pressed: 'css/rings_packs/pack5_round_pressed.svg'
   }
 };
@@ -151,7 +156,7 @@ function update_package_icons(pack_id) {
     if (i+1 == pack_id) {
       icons.children[i].src = rings_packages[i+1]['img_src_pressed'];
     } else {
-      icons.children[i].src = rings_packages[i+1]['img_src'];
+      icons.children[i].src = rings_packages[i+1]['img_icon'];
     }
   }
 }

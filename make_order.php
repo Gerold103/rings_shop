@@ -153,6 +153,11 @@ SOFTWARE.
 					"preorder_id, mark, stud_number) VALUES (".
 					"$insert_id, $mark, $number)");
 				if (!$rc) {
+					if (mysqli_errno($db_connection) == 1062) { //error duplicate rows
+						echo json_encode(['warning' => 'Такой номер студенческого билета уже зарегистрирован']);
+						$db_connection->rollback();
+						exit();
+					}
 					echo json_encode(['error' => mysqli_error($db_connection)]);
 					exit();
 				}
@@ -188,7 +193,13 @@ SOFTWARE.
 			}
 			$pack_insert_id = $db_connection->insert_id;
 			$pack_rings = $pack['rings'];
-			for ($j = 0, $szj = count($pack_rings); $j < $szj; ++$j) {
+			$szj = count($pack_rings);
+			$all_rings_count += $szj;
+			if ($all_rings_count > max_rings_count) {
+				echo json_encode(['warning' => 'Нельзя выбрать колец более '.max_rings_count]);
+				exit();
+			}
+			for ($j = 0; $j < $szj; ++$j) {
 				$next_ring = $pack_rings[$j];
 				$type = $next_ring['ring'];
 				$size = $next_ring['size'];
