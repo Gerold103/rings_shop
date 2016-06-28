@@ -72,7 +72,7 @@ rings_min_photo_id = 0;
 rings_max_photo_id = 35;
 
 date_action_header = "Внимание!";
-date_action_text = 'До 1 июля действует студенческая скидка! Посчитать скидку можно в панели предзаказа';
+date_action_text = 'До 7 июля действует скидка 20%';
 
 slideshow_photos = [
   [
@@ -408,7 +408,17 @@ function show_photos(photo_number) {
 
     price = document.createElement('div');
     local_costs = costs[ring_name];
-    price.innerHTML = materials[0]+': '+local_costs[materials[0]]+' <img src="css/ruble.svg"><br>';
+    old_cost = local_costs[materials[0]];
+    if (!is_discount()) {
+      price.innerHTML = materials[0]+': '+old_cost+' <img src="css/ruble.svg"><br>';
+    } else {
+      var disc = get_discount();
+      var new_cost = (1 - disc/100.0)*old_cost;
+      price.innerHTML = materials[0]+': '+new_cost+' <img src="css/ruble.svg">'+
+        '&nbsp;&nbsp;&nbsp;<span class="slide-old-price">(<strike>'+old_cost.toString()+
+        '</strike>)</span><br>';
+
+    }
     //price.innerHTML += materials[1]+': '+local_costs[materials[1]]+'<br>';
     //price.innerHTML += materials[2]+': '+local_costs[materials[2]];
     slide_text.append(price);
@@ -655,13 +665,27 @@ function get_count_and_cost_packed_basket()
   return {'count': rings_cnt, 'cost': cost};
 }
 
+function is_discount() {
+  var cur_date = new Date();
+  var end_date = new Date(2016, 7, 7);
+  if (cur_date < end_date) return true;
+  else return false;
+}
+
+function get_discount() {
+  if (is_discount()) return 20;
+  else return 0;
+}
+
 function show_total_check() {
   var target = $(".rings-basket-result");
   total_cost_now = total_cost_singles + total_cost_packs;
   total_cost_now = parseInt(total_cost_now);
+  var new_cost = (1 - get_discount()/100.0)*total_cost_now;
+
   target.html('<div>Всего выбрано колец: <span id="rings-count-id">' + total_rings_cnt_now + '</span> на сумму'+ 
           '<span class="rings-basket-result-price">'+
-            total_cost_now + '<img src="css/ruble.svg">'+
+            new_cost + '<img src="css/ruble.svg">'+
           '</span>'+
         '</div>'+
         '<div class="rings-basket-result-ps">'+
@@ -694,7 +718,7 @@ function update_summary() {
     target.html("<div>Нельзя выбрать более "+max_rings_count.toString()+" колец</div>");
     return;
   }
-  show_discount();
+  //show_discount();
   total_cost_singles = simple_rings['cost'];
   total_cost_packs = packed_rings['cost'];
   total_rings_cnt_now = rings_cnt;

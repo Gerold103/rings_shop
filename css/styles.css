@@ -54,6 +54,10 @@ a:link, a:visited, a:hover, a:active {
 
 /*----------*/
 
+.slide-old-price {
+  color: grey;
+}
+
 .close-slides {
   background-color: transparent;
   width: 100%;
@@ -329,6 +333,7 @@ a:link, a:visited, a:hover, a:active {
 .rings-packages {
   font-family: CoolFont;
   margin-top: 15px;
+  display: none;
 }
 
 .rings-show-packages {
