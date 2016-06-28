@@ -390,13 +390,43 @@ function show_order_area() {
   }
 }
 
-function show_photos(photo_number) {
+function activate_overlay() {
   $("#overlay").fadeIn(500);
-  all_height = window.innerHeight;
-  slideshow = $(".slideshow");
-  elem_height = slideshow.height();
-  top_offset = parseInt((all_height - elem_height)/2);
-  slideshow.css({"top": top_offset});
+}
+
+function deactivate_overlay() {
+  $("#overlay").fadeOut(500);
+}
+
+function show_popup_window(elem_id) {
+  activate_overlay();
+  var all_height = window.innerHeight;
+  var all_width = window.innerWidth;
+  var element = $(elem_id);
+  var elem_height = element.height();
+  var elem_width = element.width();
+  var top_offset = parseInt((all_height - elem_height)/2);
+  var left_offset = parseInt((all_width - elem_width)/2);
+  element.css({"top": top_offset, "left": left_offset});
+  element.fadeIn(500);
+  $('body').css({'overflow': 'hidden'});
+}
+
+function hide_popup_window(elem_id) {
+  deactivate_overlay();
+  $(elem_id).fadeOut(500);
+  $('body').css({'overflow': 'auto'});
+}
+
+function show_how_to_size_ring() {
+  show_popup_window(".sizes-instruct-table");
+}
+
+function hide_how_to_size_ring() {
+  hide_popup_window(".sizes-instruct-table");
+}
+
+function show_photos(photo_number) {
   photo_number -= 1;
   slide_text = $(".slide-text");
   ring_id = slideshow_rings_info[photo_number]['id'];
@@ -466,10 +496,7 @@ function show_photos(photo_number) {
     right_control.addEventListener("click", move_slides_right);
     right_control.innerHTML = '<img src="css/right-arrow.svg">';
     slide_photos.append(right_control);
-
-
-  slideshow.fadeIn(500);
-  $('body').css({'overflow': 'hidden'});
+  show_popup_window(".slideshow");
 }
 
 mutex = false
@@ -521,9 +548,7 @@ function pause_all_videos_from_slides()
 
 function hide_slideshow() {
   pause_all_videos_from_slides();
-  $("#overlay").fadeOut(500);
-  $(".slideshow").fadeOut(500);
-  $('body').css({'overflow': 'auto'});
+  hide_popup_window(".slideshow");
 }
 
 function is_number(val) {

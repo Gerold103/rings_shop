@@ -133,6 +133,35 @@
                   </div>
                 </div>
               </div>
+              <div align="center">
+                <div class="how-to-know-size-btn" onclick="show_how_to_size_ring();">
+                  Как определить размер кольца?
+                </div>
+                <div class="sizes-instruct-table" align="left">
+                  <img src="css/huge_close_gray.svg" onclick="hide_how_to_size_ring();">
+                  Размер кольца - это диаметр пальца. Чтобы его определить, измеряем сначала обхват пальца с помощью веревки/нитки или полоски бумаги (она особенно удобна для широких колец). Для этого берем веревку, обматывает нужный палец один раз и отрезаем лишние концы, либо намечаем маркером. Затем измеряем длину полученной веревочки в миллиметрах и смотрим соответствующий размер по таблице, приведенной ниже.
+                  <div class="sizes-instruct-table-container" align="center">
+                    <table cellspacing="0">
+                      <tr>
+                        <th>длина нитки</th>
+                        <th>размер кольца</th>
+                      </tr>
+                      <tr>
+                        <td>52 мм</td>
+                        <td>16.5</td>
+                      </tr>
+                      <tr>
+                        <td>56.6 мм</td>
+                        <td>18</td>
+                      </tr>
+                      <tr>
+                        <td>61.2 мм</td>
+                        <td>19.5</td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+              </div>
               <div align="left" class="rings-basket-result">
                 <div>Не выбрано ни одного кольца</div>
               </div>
@@ -172,6 +201,6 @@
         </div>
       </div>
     </div>
-    <div id="overlay" onclick="hide_slideshow();"></div>
+    <div id="overlay" onclick="hide_slideshow(); hide_how_to_size_ring();"></div>
   </body>
 </html>

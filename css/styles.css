@@ -604,6 +604,81 @@ a:link, a:visited, a:hover, a:active {
   display: none;
 }
 
+.how-to-know-size-btn {
+  background-color: #7a7a7a;
+  color: white;
+  border-radius: 7px;
+  display: inline-block;
+  padding: 5px;
+  padding-top: 9px;
+  padding-left: 50px;
+  padding-right: 50px;
+  font-family: CoolFont;
+  font-size: 30px;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.sizes-instruct-table {
+  width: 640px;
+  max-height: 100%;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  z-index: 6000;
+  font-family: GothicFont;
+  border-radius: 7px;
+  background-color: white;
+  padding: 40px;
+  display: none;
+}
+
+.sizes-instruct-table > img {
+  height: 20px;
+  width: 20px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.sizes-instruct-table-container table {
+  width: 500px;
+  border-radius: 6px;
+  margin-top: 30px;
+}
+
+.sizes-instruct-table-container table th,
+.sizes-instruct-table-container table td
+{
+  border: 1px solid black;
+  text-align: center;
+  padding: 6px;
+  width: 50%;
+}
+
+.sizes-instruct-table-container table tr:first-child th:first-child {
+  border-radius: 6px 0px 0px 0px;
+}
+.sizes-instruct-table-container table tr:first-child th:last-child {
+  border-radius: 0px 6px 0px 0px;
+}
+.sizes-instruct-table-container table tr:last-child td:first-child {
+  border-radius: 0px 0px 0px 6px;
+}
+.sizes-instruct-table-container table tr:last-child td:last-child {
+  border-radius: 0px 0px 6px 0px;
+}
+
+.sizes-instruct-table-container table th {
+  background-color: #bcbcbc;
+}
+
+.sizes-instruct-table-container table td {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
 .rings-disc-area {
   display: inline-block;
   background-color: #cacaca;
