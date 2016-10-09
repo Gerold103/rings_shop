@@ -38,12 +38,12 @@ SOFTWARE.
 		exit();
 	}
 	$all_packs = json_decode($_POST['packs'], true);
-	if ($all_packs === NULL) {
+	if ($all_packs != NULL) {
 		echo json_encode(['warning' => 'Ошибка ввода данных по пакетам']);
 		exit();
 	}
 	$all_discs = json_decode($_POST['discounts'], true);
-	if ($all_discs === NULL) {
+	if ($all_discs != NULL) {
 		echo json_encode(['warning' => 'Ошибка ввода данных по скидкам']);
 		exit();
 	}
@@ -141,6 +141,8 @@ SOFTWARE.
 	//--------------------process discounts
 
 	if (count($all_discs)) {
+		echo json_encode(['warning' => 'Скидки недоступны для использования']);
+		exit();
 		if (isset($all_discs['mark']) && isset($all_discs['number'])) {
 			$mark = $all_discs['mark'];
 			$number = ''.$all_discs['number'];
@@ -171,6 +173,8 @@ SOFTWARE.
 	//-------------------process packages
 
 	if (count($all_packs)) {
+		echo json_encode(['warning' => 'Пакеты недоступны для заказа']);
+		exit();
 		for ($i = 0, $sz = count($all_packs); $i < $sz; ++$i) {
 			$pack = $all_packs[$i];
 			if (!isset($rings_packages[$pack['id']])) {

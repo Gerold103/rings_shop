@@ -32,40 +32,28 @@
           </div>
         </div>
         
-        <div class="slideshow" align="center">
-          <div class="close-slides" align="right" onclick="hide_slideshow();">
-            <img src="css/big-close.svg">
-          </div>
-          <div class="slideshow-content">
-            <div class="slide-text" align="left">
-            </div>
-            <div class="slide-photos">
-            </div>
-          </div>
-        </div>
-        
         <div class="ring-variants" align="center">
           <img src="css/shadow.png" class="shadow-rounded">
           <div class="ring-item">
             <div class="ring-small-container">
               <div class="ring-small-progress-bar"></div>
-              <img class="ring-img-small" src="css/ring2/ring2_frame0000.jpg" data-imgid="1" onclick="show_photos(1);" onmouseover="mouse_on_ring(1);" onmouseout="mouse_out_ring(1);">
+              <img class="ring-img-small" src="css/ring2/ring2_frame0000.jpg" data-imgid="1" onmouseover="mouse_on_ring(1);" onmouseout="mouse_out_ring(1);">
             </div>
-            <span onclick="show_photos(1);">КОЛЬЦО</span>
+            <span>КОЛЬЦО</span>
           </div>
           <div class="ring-item">
             <div class="ring-small-container">
               <div class="ring-small-progress-bar"></div>
-              <img class="ring-img-small" src="css/ring0/ring0_frame0000.jpg" data-imgid="1" onclick="show_photos(2);" onmouseover="mouse_on_ring(2);" onmouseout="mouse_out_ring(2);">
+              <img class="ring-img-small" src="css/ring0/ring0_frame0000.jpg" data-imgid="1" onmouseover="mouse_on_ring(2);" onmouseout="mouse_out_ring(2);">
             </div>
-            <span onclick="show_photos(2);">ПЕРСТЕНЬ</span>
+            <span>ПЕРСТЕНЬ</span>
           </div>
           <div class="ring-item">
             <div class="ring-small-container">
               <div class="ring-small-progress-bar"></div>
-              <img class="ring-img-small" src="css/ring1/ring1_frame0000.jpg" data-imgid="1" onclick="show_photos(3);" onmouseover="mouse_on_ring(3);" onmouseout="mouse_out_ring(3);">
+              <img class="ring-img-small" src="css/ring1/ring1_frame0000.jpg" data-imgid="1" onmouseover="mouse_on_ring(3);" onmouseout="mouse_out_ring(3);">
             </div>
-            <span onclick="show_photos(3);">КОЛЕЧКО</span>
+            <span>КОЛЕЧКО</span>
           </div>
         </div>
         <img src="css/shadow.png" class="shadow-rounded">
@@ -89,48 +77,9 @@
                 <img src="css/ring2.svg" onclick="add_ring(3);">
               </div>
             </div>
-            <div class="rings-packages" align="center">
-              <div class="rings-show-packages" onclick="show_packages();">
-                Наши пакеты
-              </div>
-              <div class="rings-packages-packages">
-                <div class="rings-packages-icons">
-                  <img src="css/rings_packs/pack1_round.svg" onclick="show_package(1);">
-                  <img src="css/rings_packs/pack2_round.svg" onclick="show_package(2);">
-                  <img src="css/rings_packs/pack3_round.svg" onclick="show_package(3);">
-                  <img src="css/rings_packs/pack4_round.svg" onclick="show_package(4);">
-                  <img src="css/rings_packs/pack5_round.svg" onclick="show_package(5);">
-                </div>
-                <div class="rings-package-concrete">
-                  <div class="row">
-                    <div class="rings-package-full-img" align="right">
-                      <img>
-                    </div>
-                    <div class="rings-package-descr" align="left">
-                      <h3></h3>
-                      <p></p>
-                      <span></span><br>
-                      <div>Добавить</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
             <div class="container-of-all">
               <div class="rings-all-basket">
                 <div class="rings-basket-simple">
-                </div>
-                <div class="rings-basket-packs">
-                </div>
-              </div>
-              <div class="rings-basket-calc-disc" align="left">
-                <div class="rings-disc-area">
-                  Введите свой средний балл, номер студенческого билета и получите персональную скидку!<br>
-                  Балл:<input class="discount-by-date-input mark" oninput="total_with_disc=false; update_summary();">
-                  Номер:<input class="discount-by-date-input stud-number" oninput="total_with_disc=false; update_summary();">
-                  <div class="discount-date-get" onclick="calc_with_disc();">
-                    Пересчитать со скидкой
-                  </div>
                 </div>
               </div>
               <div align="center">
@@ -196,11 +145,12 @@
       <div class="footer" align="center">
         <div class="container-of-all" align="left">
           <div>ДИЗАЙН КОЛЕЦ И САЙТА: <u><a href="mailto:me@ag-one.ru">АБДУЛЛА ГАЙБУЛЛАЕВ</a></u></div>
-          <div>РАЗРАБОТКА САЙТА: <u><a href="http://lgmis.cs.msu.ru/user/25">ВЛАДИСЛАВ ШПИЛЕВОЙ</a></u>
-          <div>ТЕЛЕФОН ДЛЯ СПРАВОК: <u><a href="tel:+79265405274">+79265405274</a>&nbsp;&nbsp;&nbsp; АЛЕКСЕЙ</u></div>
+          <div>РАЗРАБОТКА САЙТА: <u><a href="http://lgmis.cs.msu.ru/user/25">ВЛАДИСЛАВ ШПИЛЕВОЙ</a></u></div>
+          <span class="footer-tel">ТЕЛЕФОН ДЛЯ СПРАВОК: <u><a href="tel:+79265405274">+79265405274</a>&nbsp;&nbsp;&nbsp; АЛЕКСЕЙ</u></span>
+          <span class="footer-legal"><u><a href="legal.html">Юридическая информация</a></u></span>
         </div>
       </div>
     </div>
-    <div id="overlay" onclick="hide_slideshow(); hide_how_to_size_ring();"></div>
+    <div id="overlay" onclick="hide_how_to_size_ring();"></div>
   </body>
 </html>
