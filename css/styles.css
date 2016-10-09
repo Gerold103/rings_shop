@@ -579,6 +579,7 @@ a:link, a:visited, a:hover, a:active {
 
 .footer > .container-of-all {
   padding: 30px;
+  padding-bottom: 50px;
 }
 
 #overlay {
