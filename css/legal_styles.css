@@ -34,6 +34,7 @@ body {
 .container-of-all {
 	max-width: 800px;
 	width: 80%;
+	margin: 50px auto 50px;
 }
 
 @media (max-device-width: 600px) {
