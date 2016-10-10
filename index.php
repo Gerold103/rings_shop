@@ -1,3 +1,15 @@
+<?php
+  date_default_timezone_set('Europe/Moscow');
+  $need_discount = false;
+  $discount_text = '';
+  $discount_end_time = strtotime('2016-11-01 00:00');
+  $current_time = time();
+  if ($current_time < $discount_end_time) {
+    $need_discount = true;
+    $discount_text = 'До 1 ноября на все виды колец действует скидка 20%!';
+  }
+?>
+
 <html>
   <head>
     <meta charset="utf-8">
@@ -55,6 +67,20 @@
             </div>
             <span>КОЛЕЧКО</span><span class="price">2500руб.</span>
           </div>
+
+          <?php if (isset($need_discount) && $need_discount) { ?>
+          <div>
+            <div class="discount-info">
+              <div class="discount-title">
+                <?php echo($discount_text); ?>
+              </div>
+              <div class="discount-ref">
+                * цена указана без скидки
+              </div>
+            </div>
+          </div>
+          <?php } ?>
+
         </div>
         <img src="css/shadow.png" class="shadow-rounded">
         <div class="container-of-all">

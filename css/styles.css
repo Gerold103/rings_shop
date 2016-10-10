@@ -84,7 +84,7 @@ a:link, a:visited, a:hover, a:active {
   position: relative;
   width: 100%;
   background-color: white;
-  padding-bottom: 45px;
+  padding-bottom: 20px;
 }
 
 .ring-variants .ring-item {
@@ -170,6 +170,27 @@ a:link, a:visited, a:hover, a:active {
 .make-order-button div:hover {
   background-color: #9DFF0A;
   cursor: pointer;
+}
+
+.ring-variants .discount-info {
+  background-color: #484848;
+  padding: 20px;
+  padding-left: 60px;
+  padding-right: 60px;
+  border-radius: 9px;
+  margin: 10px;
+  display: inline-block;
+  font-family: GothicFont;
+}
+
+.ring-variants .discount-title {
+  font-size: 22px;
+  color: #34c3e7;
+}
+
+.ring-variants .discount-ref {
+  font-size: 16px;
+  color: #ededed;
 }
 
 /*-----------*/
