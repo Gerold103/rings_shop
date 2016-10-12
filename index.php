@@ -181,7 +181,6 @@
           <div>ДИЗАЙН КОЛЕЦ И САЙТА: <u><a href="mailto:me@ag-one.ru">АБДУЛЛА ГАЙБУЛЛАЕВ</a></u></div>
           <div>РАЗРАБОТКА САЙТА: <u><a href="http://lgmis.cs.msu.ru/user/25">ВЛАДИСЛАВ ШПИЛЕВОЙ</a></u></div>
           <span class="footer-tel">ТЕЛЕФОН ДЛЯ СПРАВОК: <u><a href="tel:+79265405274">+79265405274</a>&nbsp;&nbsp;&nbsp; АЛЕКСЕЙ</u></span>
-          <span class="footer-legal"><u><a href="legal.html">Юридическая информация</a></u></span>
         </div>
       </div>
     </div>
