@@ -40,7 +40,15 @@
         <div class="container-of-all">
           <div role="Header" class="main-header-place" align="center">
             <img src="css/main_rings.png">
-            <h1 align="center">Кольца<br><span><font color="#75acff">ВМК</font>МГУ</span></h1>
+            <span>
+              <h1 align="center">Кольца<br><span><font color="#75acff">ВМК</font>МГУ</span></h1>
+              <a href="https://vk.com/cmcedin">
+                <div class="header-vk-banner">
+                  <h3>ПРИГЛАШАЕМ ДЕВУШЕК</h3>
+                  ПРИНЯТЬ УЧАСТИЕ В НАШЕМ КОНКУРСЕ!
+                </div>
+              </a>
+            </span>
           </div>
         </div>
         
