@@ -32,18 +32,16 @@ SOFTWARE.
 		echo json_encode(['warning' => 'Телефон не может быть пустым']);
 		exit();
 	}
-	$all_rings = json_decode($_POST['content'], true);
+	$all_rings = json_decode($_POST['content'] ?? NULL, true);
 	if ($all_rings === NULL) {
 		echo json_encode(['warning' => 'Ошибка ввода данных']);
 		exit();
 	}
-	$all_packs = json_decode($_POST['packs'], true);
-	if ($all_packs != NULL) {
+	if ($_POST['packs'] ?? NULL != NULL) {
 		echo json_encode(['warning' => 'Ошибка ввода данных по пакетам']);
 		exit();
 	}
-	$all_discs = json_decode($_POST['discounts'], true);
-	if ($all_discs != NULL) {
+	if ($_POST['discounts'] ?? NULL != NULL) {
 		echo json_encode(['warning' => 'Ошибка ввода данных по скидкам']);
 		exit();
 	}
@@ -138,9 +136,8 @@ SOFTWARE.
 		exit();
 	}
 
-	//--------------------process discounts
-
-	if (count($all_discs)) {
+	// Process discounts. But now is disabled.
+	if (false) {
 		echo json_encode(['warning' => 'Скидки недоступны для использования']);
 		exit();
 		if (isset($all_discs['mark']) && isset($all_discs['number'])) {
@@ -170,9 +167,8 @@ SOFTWARE.
 		}
 	}
 
-	//-------------------process packages
-
-	if (count($all_packs)) {
+	// Process packages. But now is disabled.
+	if (false) {
 		echo json_encode(['warning' => 'Пакеты недоступны для заказа']);
 		exit();
 		for ($i = 0, $sz = count($all_packs); $i < $sz; ++$i) {
