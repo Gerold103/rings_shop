@@ -225,6 +225,12 @@ SOFTWARE.
 
 
 	/*
+CREATE DATABASE rings;
+
+CREATE USER <your user> IDENTIFIED BY '<your pass>';
+
+GRANT ALL PRIVILEGES ON rings.* to '<your user>';
+
 CREATE TABLE `preorders` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
