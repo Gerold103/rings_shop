@@ -21,13 +21,17 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
   include_once("credentials.php");
-  $db_connection = mysqli_connect(db_host, db_user_name, db_password);
-  if (!$db_connection->ping()) {
-    echo json_encode(['error' => 'Database connection error']);
+  $db_connection = mysqli_connect(db_host, db_user_name, db_password, db_name);
+  if (!$db_connection) {
+    echo json_encode([
+      'error' => sprintf(
+        'Data base connection error: %s', mysqli_connect_error()
+      )
+    ]);
     exit();
   }
-  if (!$db_connection->select_db(db_name)) {
-    echo json_encode(['error' => 'Database connection error']);
+  if (!$db_connection->ping()) {
+    echo json_encode(['error' => 'Database ping error']);
     exit();
   }
   if (!$db_connection->query("SET CHARACTER SET 'utf8'")) {
