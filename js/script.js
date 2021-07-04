@@ -569,7 +569,15 @@ function send_info() {
       if (local_server.readyState == 4) {
         button.html("ЗАКАЗАТЬ");
         console.log(local_server.responseText);
-        answer = JSON.parse(local_server.responseText);
+        try {
+          answer = JSON.parse(local_server.responseText);
+        } catch(error) {
+          console.log('error during parsing: ', error,
+                      local_server.responseText);
+          show_response_status(response_status_error_color,'На сервере '+
+                               'произошла ошибка. Пожалуйста, повторите позже.')
+          return;
+        }
         if ('error' in answer) {
           console.log('error: ', answer['error']);
           show_response_status(response_status_error_color,'На сервере произошла ошибка. '+
