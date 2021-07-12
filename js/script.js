@@ -63,9 +63,9 @@ total_with_disc = false;
 rings_timeouts = [null, null, null];
 rings_directions = [+1, +1, +1];
 rings_images = [[], [], []];
-ring_urls = ['css/ring2/ring2_frame0',
-  'css/ring0/ring0_frame0',
-  'css/ring1/ring1_frame0'];
+ring_urls = ['/css/ring2/ring2_frame0',
+  '/css/ring0/ring0_frame0',
+  '/css/ring1/ring1_frame0'];
 rings_cycle = 90;
 rings_min_photo_id = 0;
 rings_max_photo_id = 35;
@@ -297,7 +297,7 @@ function show_total_check() {
 
   target.html('<div>Всего выбрано колец: <span id="rings-count-id">' + total_rings_cnt_now + '</span> на сумму'+ 
           '<span class="rings-basket-result-price">'+
-            new_cost + '<img src="css/ruble.svg">'+
+            new_cost + '<img src="/css/ruble.svg">'+
           '</span>'+
         '</div>'+
         '<div class="rings-basket-result-ps">'+
@@ -463,7 +463,7 @@ function create_ring_busket_item(id) {
     close_btn = document.createElement('span');
       img = document.createElement('img');
       img.className = "remove-btn";
-      img.src = "css/small-close.svg";
+      img.src = "/css/small-close.svg";
       img.addEventListener('click', remove_ring);
       close_btn.appendChild(img);
 
