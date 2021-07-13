@@ -1,0 +1,127 @@
+@font-face {
+  font-family: MonLight;
+  src: url("fonts/Montserrat-Light.ttf");
+}
+
+@font-face {
+  font-family: MonMedium;
+  src: url("fonts/Montserrat-Medium.ttf");
+}
+
+body {
+    background: linear-gradient(111.12deg, rgba(0, 0, 0, 0.2) 2.82%, rgba(182, 182, 182, 0.2) 107.97%), #494949;
+    min-height: 100vh;
+    padding: 0;
+    margin: 0;
+}
+
+header {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    background: url('images/logo.svg') 50% 50% no-repeat;
+    background-size: 100% auto;
+    width: 300px;
+    height: 150px;
+    margin: 80px;
+}
+
+.socials {
+    display: flex;
+}
+
+.socials a {
+    display: block;
+    width: 30px;
+    height: 30px;
+    background-size: 100% auto;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    transition: all 0.1s ease-in-out;
+    margin-left: 20px;
+}
+
+.socials a:hover {
+    transform: scale(1.2);
+}
+
+.vk {
+    background-image: url('images/vk.svg');
+}
+
+.tg {
+    background-image: url('images/tg.svg');
+}
+
+
+/***********************/
+
+.carousel {
+    width: 100%;
+    display: flex;
+    overflow: hidden;
+}
+
+.photo {
+    min-width: 40%;
+    transition: transform 0.2s ease-in-out;
+    padding: 10px 0;
+    position: relative;
+}
+.img {
+    width: 100%;
+    transform: perspective(500px) rotateY(3deg) scale(1.01);
+    box-shadow: -4px 0px 5px 0px rgba(0, 0, 0, 0.2);
+}
+
+.img img {
+    width: 100%;
+}
+
+.img .label, .img .price {
+    position: absolute;
+    z-index: 10;
+    left: 30px;
+    font-family: MonLight, sans-serif;
+    text-transform: uppercase;
+}
+
+.img .label {
+    font-family: MonMedium, sans-serif;
+    bottom: 60px;
+}
+
+.img .price {
+    bottom: 30px;
+}
+
+@media (max-width: 1000px){
+    .photo {
+        min-width: 70%;
+    }
+}
+
+
+/***********************/
+.btn {
+    display: block;
+    padding: 20px 30px;
+    font-family: MonMedium, sans-serif;
+    text-transform: uppercase;
+    background-color: #4FAED7;
+    color: #2E2E2E;
+    border-radius: 5px;
+    margin: 80px;
+    width: fit-content;
+    box-shadow: 0px 5px 0px #2F6880;
+    transition: all 0.1s ease-in-out;
+    text-decoration: none;
+}
+
+.btn:hover {
+    box-shadow: 0px 1px 0px #2F6880;
+    transform: translateY(4px);
+    cursor: pointer;
+}
