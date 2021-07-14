@@ -30,7 +30,10 @@ header {
 
 .socials {
     display: flex;
+    flex-grow: 1;
 }
+
+header .btn {}
 
 .socials a {
     display: block;
@@ -62,12 +65,12 @@ header {
     width: 100%;
     display: flex;
     overflow: hidden;
+    touch-action: pan-x;
 }
 
 .photo {
     min-width: 40%;
-    transition: transform 0.2s ease-in-out;
-    padding: 10px 0;
+    padding: 20px 0;
     position: relative;
 }
 .img {
@@ -103,6 +106,23 @@ header {
     }
 }
 
+@media (min-width: 1700px) {
+    .carousel {
+        flex-wrap: wrap;
+        padding-left: 60px;
+    }
+    .photo {
+        width: calc(25% - 52px);
+        max-width: calc(25% - 52px);
+        min-width: calc(25% - 52px);
+        padding: 10px;
+    }
+    .img {
+        transform: none;
+        box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+    }
+}
+
 
 /***********************/
 .btn {
@@ -120,8 +140,28 @@ header {
     text-decoration: none;
 }
 
+/*.notransition {
+    -webkit-transition: none !important;
+    -moz-transition: none !important;
+    -o-transition: none !important;
+    transition: none !important;
+}*/
+
 .btn:hover {
     box-shadow: 0px 1px 0px #2F6880;
     transform: translateY(4px);
     cursor: pointer;
+}
+
+@media (min-aspect-ratio: 1/1){
+    article .btn {
+        display: none;
+    }
+}
+
+
+@media (max-aspect-ratio: 1/1){
+    header .btn {
+        display: none;
+    }
 }
