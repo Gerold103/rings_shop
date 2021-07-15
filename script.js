@@ -79,18 +79,6 @@ const cards = images.map((img, index) => {
 
 let disabled = false;
 
-cards.forEach(card => {
-    card.img.onclick = function(e){
-        let step = -card.actualShiftX();
-        move(step);
-    }
-});
-
-
-carousel.onwheel = (e)=>{
-    move(-e.deltaY);
-};
-
 function move(step){
     if (step > 0){
         step = 100;
@@ -113,21 +101,36 @@ function move(step){
     });
 }
 
-/***********************************/
-let moving = null;
-carousel.addEventListener('touchstart', (e) => {
-    if (moving === null){
-        moving = e.touches[0].clientX;
-    }
-});
-carousel.addEventListener('touchmove', (e) => {
-    const x = e.touches[0].clientX;
-    console.log(moving, x);
-    if (moving && x != moving){
-        const step = x - moving;
-        moving = undefined;
-        move(step).then(()=>{
-            moving = null;
-        });
-    }
-});
+
+if (window.innerWidth < 1700){
+    cards.forEach(card => {
+        card.img.onclick = function(e){
+            let step = -card.actualShiftX();
+            move(step);
+        }
+    });
+
+
+    carousel.onwheel = (e)=>{
+        move(-e.deltaY);
+    };
+
+    /***********************************/
+    let moving = null;
+    carousel.addEventListener('touchstart', (e) => {
+        if (moving === null){
+            moving = e.touches[0].clientX;
+        }
+    });
+    carousel.addEventListener('touchmove', (e) => {
+        const x = e.touches[0].clientX;
+        console.log(moving, x);
+        if (moving && x != moving){
+            const step = x - moving;
+            moving = undefined;
+            move(step).then(()=>{
+                moving = null;
+            });
+        }
+    });
+}

@@ -66,6 +66,7 @@ header .btn {}
     display: flex;
     overflow: hidden;
     touch-action: pan-x;
+    box-sizing: border-box;
 }
 
 .photo {
